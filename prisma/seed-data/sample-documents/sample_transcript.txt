@@ -1,0 +1,31 @@
+METROPOLITAN INSTITUTE OF TECHNOLOGY
+OFFICIAL ACADEMIC TRANSCRIPT & PROJECT PORTFOLIO
+
+Student Name: Alex Rivera
+Student ID: MIT-2022-CS-0842
+Degree: Bachelor of Technology in Computer Science & Engineering
+Graduation: May 2026
+Cumulative GPA: 3.82 / 4.00
+
+ACADEMIC COURSEWORK:
+- CS101: Introduction to Computer Programming (Python, Algorithms) - Grade: A (4.0)
+- CS201: Data Structures and Algorithms (C++, Trees, Graphs, Sorting) - Grade: A (4.0)
+- CS301: Database Management Systems (SQL, Relational Modeling, PostgreSQL) - Grade: A- (3.7)
+- CS305: Web Technologies & Applications (HTML5, CSS3, JavaScript, REST APIs) - Grade: A (4.0)
+- CS401: Software Engineering Practices (Git, Agile, Unit Testing, CI/CD) - Grade: A (4.0)
+- CS410: Distributed Systems & Cloud Computing (Docker, Microservices, AWS) - Grade: B+ (3.3)
+
+TECHNICAL SKILLS & PROFICIENCIES:
+Languages: TypeScript, JavaScript, Python, C++, SQL, HTML, CSS
+Frameworks & Libraries: React, Next.js, Node.js, Express, Tailwind CSS, Prisma
+Databases & Cloud: PostgreSQL, SQLite, MongoDB, Docker, Git, REST APIs
+Foundational: Data Structures, Algorithms, Object-Oriented Programming, System Design
+
+CAPSTONE & PERSONAL PROJECTS:
+1. DevFlow - Developer Task & Collaboration Platform
+   Technologies: Next.js, TypeScript, Tailwind CSS, Prisma, PostgreSQL
+   Description: Built a real-time collaborative Kanban board with drag-and-drop support, markdown notes, and GitHub webhook notifications. Implemented optimistic UI updates and JWT authentication.
+
+2. CloudMetric - Server Health & Metrics Dashboard
+   Technologies: React, Node.js, Express, Docker, Chart.js
+   Description: Architected a lightweight monitoring agent and web dashboard visualizing CPU, memory, and disk latency in real time. Designed REST endpoints and responsive dark mode interfaces.

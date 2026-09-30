@@ -1,0 +1,74 @@
+[
+  {
+    "title": "Full Stack Web Developer",
+    "slug": "full-stack-web-developer",
+    "description": "Design and build end-to-end modern web applications from responsive frontends to scalable backends and databases.",
+    "avgSalary": "$95,000 - $145,000 / ₹12-24 LPA",
+    "demandTrend": "+21% YoY",
+    "category": "Software Engineering",
+    "requiredSkills": ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "SQL", "PostgreSQL", "RESTful API Design", "Git & GitHub"]
+  },
+  {
+    "title": "Backend Systems Engineer",
+    "slug": "backend-systems-engineer",
+    "description": "Build high-throughput APIs, microservice architectures, and robust data persistence layers.",
+    "avgSalary": "$105,000 - $160,000 / ₹14-28 LPA",
+    "demandTrend": "+19% YoY",
+    "category": "Software Engineering",
+    "requiredSkills": ["Java", "Python", "SQL", "PostgreSQL", "Redis", "Docker", "RESTful API Design", "System Design", "Microservices Architecture"]
+  },
+  {
+    "title": "Frontend Engineer",
+    "slug": "frontend-engineer",
+    "description": "Craft exceptional, accessible, and high-performance interactive client interfaces and web applications.",
+    "avgSalary": "$90,000 - $140,000 / ₹10-22 LPA",
+    "demandTrend": "+17% YoY",
+    "category": "Software Engineering",
+    "requiredSkills": ["React", "TypeScript", "JavaScript", "HTML5 & CSS3", "Tailwind CSS", "User Experience (UX) Design", "Unit & Integration Testing"]
+  },
+  {
+    "title": "Data Scientist & AI Practitioner",
+    "slug": "data-scientist-ai",
+    "description": "Extract actionable business insights, engineer predictive models, and deploy machine learning pipelines.",
+    "avgSalary": "$110,000 - $165,000 / ₹14-30 LPA",
+    "demandTrend": "+28% YoY",
+    "category": "Data & AI",
+    "requiredSkills": ["Python", "SQL", "Pandas", "NumPy", "Scikit-Learn", "PyTorch", "Data Visualization (Tableau/PowerBI)", "Critical Thinking"]
+  },
+  {
+    "title": "Machine Learning Engineer",
+    "slug": "machine-learning-engineer",
+    "description": "Bridge data science and production engineering by deploying scalable deep learning systems and LLM pipelines.",
+    "avgSalary": "$125,000 - $185,000 / ₹18-35 LPA",
+    "demandTrend": "+35% YoY",
+    "category": "Data & AI",
+    "requiredSkills": ["Python", "PyTorch", "TensorFlow", "Docker", "Kubernetes", "Linux / Bash", "CI/CD Pipelines", "System Design"]
+  },
+  {
+    "title": "DevOps & Cloud Engineer",
+    "slug": "devops-cloud-engineer",
+    "description": "Automate infrastructure provisioning, CI/CD pipelines, container orchestration, and cloud reliability.",
+    "avgSalary": "$105,000 - $155,000 / ₹12-25 LPA",
+    "demandTrend": "+24% YoY",
+    "category": "Infrastructure & Operations",
+    "requiredSkills": ["Docker", "Kubernetes", "AWS", "CI/CD Pipelines", "Linux / Bash", "DevOps Practices", "Git & GitHub"]
+  },
+  {
+    "title": "Cybersecurity Analyst",
+    "slug": "cybersecurity-analyst",
+    "description": "Protect critical enterprise networks, assess vulnerabilities, monitor threats, and enforce compliance policies.",
+    "avgSalary": "$98,000 - $150,000 / ₹10-22 LPA",
+    "demandTrend": "+31% YoY",
+    "category": "Security & Compliance",
+    "requiredSkills": ["Cybersecurity Fundamentals", "Linux / Bash", "Data Governance & Privacy", "Problem Solving", "Critical Thinking"]
+  },
+  {
+    "title": "Data & Technology Consultant",
+    "slug": "data-tech-consultant",
+    "description": "Translate business objectives into technical architectures, BI analytics dashboards, and client transformation plans.",
+    "avgSalary": "$85,000 - $135,000 / ₹9-18 LPA",
+    "demandTrend": "+16% YoY",
+    "category": "Consulting & Strategy",
+    "requiredSkills": ["SQL", "Data Visualization (Tableau/PowerBI)", "Verbal Presentation", "Written Communication", "Problem Solving", "Agile & Scrum Methodologies"]
+  }
+]

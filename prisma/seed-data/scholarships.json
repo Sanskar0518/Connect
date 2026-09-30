@@ -1,0 +1,500 @@
+[
+  {
+    "id": "sch-001",
+    "title": "Reliance Foundation Undergraduate Scholarship",
+    "provider": "Reliance Foundation",
+    "amount": "Up to Rs 2,00,000 per year",
+    "deadline": "2026-12-01",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA"],
+      "minGPA": 3.5,
+      "maxFamilyIncomeINR": 1500000,
+      "year": [1, 2, 3, 4]
+    },
+    "description": "Merit-cum-means scholarship supporting ambitious undergraduate students in computer science, mathematics, and emerging technology degrees across India.",
+    "url": "https://www.scholarships.reliancefoundation.org/",
+    "checklist": [
+      "Upload official semester transcript (all semesters)",
+      "Provide proof of household annual income",
+      "Submit 500-word statement of career intent",
+      "Arrange two academic reference letters",
+      "Complete the online application form",
+      "Upload recent passport-size photograph"
+    ]
+  },
+  {
+    "id": "sch-002",
+    "title": "Generation Google Scholarship (APAC)",
+    "provider": "Google",
+    "amount": "$2,500 USD (~Rs 2,05,000)",
+    "deadline": "2026-11-15",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.S.", "M.Tech"],
+      "year": [1, 2, 3],
+      "focus": "Computer Science or related technical field"
+    },
+    "description": "Awarded to aspiring students who excel in computing and demonstrate a strong commitment to diversity, equity, and inclusion in tech. Includes mentorship access.",
+    "url": "https://buildyourfuture.withgoogle.com/scholarships/generation-google-scholarship-apac",
+    "checklist": [
+      "Prepare resume highlighting technical leadership",
+      "Obtain current academic transcript",
+      "Write responses to two short essay questions",
+      "Complete 15-minute coding challenge sample",
+      "Fill the scholarship application form",
+      "Submit proof of enrollment"
+    ]
+  },
+  {
+    "id": "sch-003",
+    "title": "Tata Capital Pankh Scholarship Programme",
+    "provider": "Tata Capital",
+    "amount": "Up to Rs 50,000 per year",
+    "deadline": "2026-10-31",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA", "MBA", "M.Tech"],
+      "minGPA": 3.0,
+      "maxFamilyIncomeINR": 400000,
+      "year": [1, 2]
+    },
+    "description": "Financial assistance for meritorious students from economically disadvantaged backgrounds pursuing professional undergraduate courses in STEM and management.",
+    "url": "https://www.tatacapital.com/pankh-scholarship.html",
+    "checklist": [
+      "Fill online application on Buddy4Study portal",
+      "Submit family income certificate (SDM/Tehsildar issued)",
+      "Upload bonafide certificate from college",
+      "Provide previous year mark sheet",
+      "Write a 300-word essay on career goals",
+      "Provide ration card or BPL certificate if applicable"
+    ]
+  },
+  {
+    "id": "sch-004",
+    "title": "PMSSS – Prime Minister's Special Scholarship Scheme",
+    "provider": "AICTE / Ministry of Education",
+    "amount": "Up to Rs 30,000 per year (tuition) + Rs 1,00,000 (maintenance)",
+    "deadline": "2026-11-30",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "MBBS", "BBA", "MBA"],
+      "state": ["Jammu & Kashmir", "Ladakh"],
+      "minGPA": 2.5,
+      "year": [1]
+    },
+    "description": "Special scheme for students from J&K and Ladakh pursuing higher education in institutions outside J&K. Covers tuition and living costs. Administered through AICTE.",
+    "url": "https://www.aicte-india.org/bureaus/jk",
+    "checklist": [
+      "Apply on AICTE portal with J&K domicile proof",
+      "Submit domicile certificate",
+      "Provide 12th class marks certificate",
+      "Bank account details (IFSC, account number)",
+      "Complete Aadhaar verification",
+      "Upload admission offer letter from approved institute"
+    ]
+  },
+  {
+    "id": "sch-005",
+    "title": "NSP Central Sector Scholarship Scheme",
+    "provider": "Ministry of Education / National Scholarship Portal",
+    "amount": "Rs 12,000 per year (day scholars) / Rs 20,000 (hostellers)",
+    "deadline": "2026-10-31",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA", "B.Sc", "BA", "B.Com"],
+      "maxFamilyIncomeINR": 800000,
+      "minGPA": 3.2,
+      "year": [1, 2, 3, 4]
+    },
+    "description": "Central government scholarship for undergraduate and postgraduate students from low-income families who scored in the top 20th percentile in their board exams.",
+    "url": "https://scholarships.gov.in/",
+    "checklist": [
+      "Register on National Scholarship Portal (NSP)",
+      "Provide 10th and 12th marksheets",
+      "Submit income certificate from competent authority",
+      "Provide caste certificate if applicable",
+      "Complete Aadhaar-bank account linking",
+      "Upload bonafide certificate for current year"
+    ]
+  },
+  {
+    "id": "sch-006",
+    "title": "Adobe Digital Academy Scholarship – India",
+    "provider": "Adobe",
+    "amount": "$10,000 (~Rs 8,20,000) one-time",
+    "deadline": "2026-12-15",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.S.", "M.S.", "M.Tech"],
+      "focus": "Computer Science, UX Design, or Creative Technology",
+      "minGPA": 3.5
+    },
+    "description": "Awarded to students who demonstrate exceptional creativity and technical ability in design, computer science, or digital media. Includes internship referral at Adobe.",
+    "url": "https://adobe.com/india/education/scholarship",
+    "checklist": [
+      "Build a portfolio of design or CS projects",
+      "Write a personal statement (800 words)",
+      "Submit two recommendation letters",
+      "Provide current academic transcript",
+      "Submit proof of enrollment",
+      "Record a 2-minute introduction video"
+    ]
+  },
+  {
+    "id": "sch-007",
+    "title": "Narotam Sekhsaria Foundation Scholarship",
+    "provider": "Narotam Sekhsaria Foundation",
+    "amount": "Up to Rs 20,00,000 for PG at IITs/IIMs and abroad",
+    "deadline": "2026-11-20",
+    "eligibilityCriteria": {
+      "degree": ["M.Tech", "MBA", "M.Sc", "LLM"],
+      "minGPA": 3.6,
+      "maxFamilyIncomeINR": 2500000
+    },
+    "description": "Merit-cum-means scholarship for postgraduate study in India and abroad. Covers tuition, living, and travel. Focuses on motivated students pursuing excellence in STEM or law.",
+    "url": "https://www.nsscholarship.in/",
+    "checklist": [
+      "Submit academic transcripts of all prior degrees",
+      "Write a detailed statement of purpose (2000 words)",
+      "Provide three reference letters from professors",
+      "Attach admission offer letter from target institution",
+      "Submit proof of annual family income",
+      "Fill the scholarship application form online"
+    ]
+  },
+  {
+    "id": "sch-008",
+    "title": "Amazon Future Engineer Scholarship",
+    "provider": "Amazon / Infosys BPM Foundation",
+    "amount": "Rs 40,000 per year for 4 years",
+    "deadline": "2026-11-05",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "B.Sc"],
+      "focus": "Computer Science, IT, or Engineering",
+      "maxFamilyIncomeINR": 600000,
+      "year": [1]
+    },
+    "description": "Supports first-year CS/Engineering students from underserved backgrounds to sustain and excel in their undergraduate studies. Includes Amazon mentorship sessions.",
+    "url": "https://www.amazonfutureengineer.com/scholarships",
+    "checklist": [
+      "Register on Amazon Future Engineer India portal",
+      "Upload 12th board marksheet",
+      "Provide income certificate for current financial year",
+      "Write a 400-word essay on your tech journey",
+      "Confirm enrollment in an eligible B.Tech/BE programme",
+      "Obtain institute NOC or enrollment confirmation"
+    ]
+  },
+  {
+    "id": "sch-009",
+    "title": "Kishore Vaigyanik Protsahan Yojana (KVPY) Fellowship",
+    "provider": "Department of Science and Technology (DST)",
+    "amount": "Rs 60,000–80,000 per year fellowship",
+    "deadline": "2026-10-15",
+    "eligibilityCriteria": {
+      "degree": ["B.Sc", "B.S.", "BS-MS"],
+      "focus": "Pure Sciences: Physics, Chemistry, Mathematics, Biology",
+      "minGPA": 3.4
+    },
+    "description": "National fellowship to identify students with strong aptitude for research in basic sciences. Fellows gain access to national laboratories, IISc, and IISERs for summer projects.",
+    "url": "https://kvpy.iisc.ac.in/",
+    "checklist": [
+      "Register for KVPY examination online",
+      "Prepare for the written aptitude test",
+      "Clear the interview round",
+      "Submit class 12 marksheet or college enrollment proof",
+      "Provide proof of Indian nationality",
+      "Link scholarship to bank account post-selection"
+    ]
+  },
+  {
+    "id": "sch-010",
+    "title": "HDFC Bank Parivartan Scholarship",
+    "provider": "HDFC Bank Parivartan Fund",
+    "amount": "Up to Rs 75,000 per year",
+    "deadline": "2026-11-10",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA", "B.Sc", "Diploma"],
+      "maxFamilyIncomeINR": 500000,
+      "minGPA": 3.0
+    },
+    "description": "Supports meritorious students from economically weaker sections pursuing professional courses. Covers tuition, accommodation, and study material. Managed via Buddy4Study portal.",
+    "url": "https://www.buddy4study.com/page/hdfc-bank-parivartan-scholarship",
+    "checklist": [
+      "Apply on Buddy4Study portal",
+      "Submit income proof (Form 16 or salary slips)",
+      "Provide latest academic marksheet",
+      "Upload Aadhaar card and bank passbook",
+      "Write a 200-word essay on your financial challenges",
+      "Obtain bonafide certificate from institution"
+    ]
+  },
+  {
+    "id": "sch-011",
+    "title": "Infosys Foundation Scholarship for Women in STEM",
+    "provider": "Infosys Foundation",
+    "amount": "Rs 1,00,000 per year for 4 years",
+    "deadline": "2026-12-20",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "B.Sc", "BCA"],
+      "gender": "Female",
+      "minGPA": 3.5,
+      "maxFamilyIncomeINR": 1200000
+    },
+    "description": "Scholarship exclusively for women students pursuing STEM undergraduate degrees, to help close the gender gap in technology and engineering careers.",
+    "url": "https://infosys.com/infosys-foundation/scholarship.html",
+    "checklist": [
+      "Verify eligibility (women students in STEM UG programme)",
+      "Obtain latest academic transcript",
+      "Provide family income certificate",
+      "Write a personal statement on career goals in STEM (500 words)",
+      "Submit two faculty recommendation letters",
+      "Upload proof of enrollment for current academic year"
+    ]
+  },
+  {
+    "id": "sch-012",
+    "title": "Dr. Reddy's Foundation BOLD Scholarship",
+    "provider": "Dr. Reddy's Foundation",
+    "amount": "Rs 60,000 per year",
+    "deadline": "2026-10-25",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "B.Pharm", "B.Sc", "MBA"],
+      "maxFamilyIncomeINR": 700000,
+      "minGPA": 2.8,
+      "year": [1, 2, 3]
+    },
+    "description": "Empowers students from low-income families through financial support, career guidance, mentoring, and job placement assistance. Focuses on employability alongside academics.",
+    "url": "https://drrf.in/",
+    "checklist": [
+      "Apply via Dr. Reddy's Foundation portal",
+      "Submit family BPL or income certificate",
+      "Provide previous year marksheet",
+      "Attend online orientation session",
+      "Write a statement on how this scholarship will help your career",
+      "Provide reference from teacher or NGO worker"
+    ]
+  },
+  {
+    "id": "sch-013",
+    "title": "Microsoft Scholarship Program – India",
+    "provider": "Microsoft",
+    "amount": "$5,000 (~Rs 4,10,000) one-time",
+    "deadline": "2026-11-30",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.S.", "M.Tech", "M.S."],
+      "focus": "Computer Science, Software Engineering, or Data Science",
+      "minGPA": 3.6
+    },
+    "description": "For undergraduate or graduate students pursuing CS/engineering with a commitment to community leadership and creating inclusive technology. Includes Microsoft Mentorship access.",
+    "url": "https://careers.microsoft.com/students/us/en/scholarships",
+    "checklist": [
+      "Complete the online application on Microsoft Careers",
+      "Submit academic transcript",
+      "Write two essays on leadership and community impact",
+      "Provide two letters of recommendation",
+      "Record a 90-second intro video",
+      "Confirm degree program and enrollment status"
+    ]
+  },
+  {
+    "id": "sch-014",
+    "title": "Aditya Birla Scholarship",
+    "provider": "Aditya Birla Group",
+    "amount": "Rs 1,20,000 to Rs 1,65,000 per year",
+    "deadline": "2026-09-30",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "MBA", "LLB"],
+      "institution": ["IITs", "IIMs", "BITS", "NLUs"],
+      "minGPA": 3.7,
+      "year": [1]
+    },
+    "description": "Prestigious scholarship for first-year students admitted to India's premier institutions. Covers tuition, living, and books. Selection includes a rigorous interview process.",
+    "url": "https://adityabirlascholars.net/",
+    "checklist": [
+      "Register on the Aditya Birla Scholars portal",
+      "Submit JEE/CLAT/CAT scorecard",
+      "Provide offer or admission letter from premier institution",
+      "Write a 500-word essay on your life goal",
+      "Attend an elimination interview",
+      "Provide bank account details for disbursement"
+    ]
+  },
+  {
+    "id": "sch-015",
+    "title": "LIC Golden Jubilee Scholarship",
+    "provider": "Life Insurance Corporation of India (LIC)",
+    "amount": "Rs 20,000 per year",
+    "deadline": "2026-11-28",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "MBBS", "B.Sc", "BA", "B.Com"],
+      "maxFamilyIncomeINR": 250000,
+      "minGPA": 2.5,
+      "year": [1]
+    },
+    "description": "Government-backed LIC scholarship for fresh undergraduate students from economically weaker sections. Renewable annually based on academic performance.",
+    "url": "https://scholarships.gov.in/",
+    "checklist": [
+      "Apply through National Scholarship Portal (NSP)",
+      "Submit 10th and 12th marksheets",
+      "Provide income certificate from state authority",
+      "Upload Aadhaar card and caste certificate if applicable",
+      "Provide bank account linked with Aadhaar",
+      "Obtain bonafide letter from current college"
+    ]
+  },
+  {
+    "id": "sch-016",
+    "title": "Wipro Cares Scholarship",
+    "provider": "Wipro Cares",
+    "amount": "Rs 30,000 per year",
+    "deadline": "2026-12-10",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA", "B.Sc"],
+      "maxFamilyIncomeINR": 400000,
+      "minGPA": 3.0
+    },
+    "description": "Wipro's CSR scholarship for meritorious students from disadvantaged backgrounds studying in IT and Engineering programmes. Includes a Wipro mentorship component.",
+    "url": "https://wiprocares.com/scholarships",
+    "checklist": [
+      "Fill Wipro Cares scholarship application form",
+      "Upload marksheet from previous academic year",
+      "Submit family income certificate",
+      "Provide bonafide certificate from institution",
+      "Write a 300-word essay on your career vision",
+      "Obtain one recommendation letter from faculty"
+    ]
+  },
+  {
+    "id": "sch-017",
+    "title": "Sitaram Jindal Foundation Scholarship",
+    "provider": "Sitaram Jindal Foundation",
+    "amount": "Rs 1,000 to Rs 3,000 per month (based on course)",
+    "deadline": "2026-10-20",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "MBBS", "B.Sc", "MBA", "M.Tech"],
+      "maxFamilyIncomeINR": 350000,
+      "minGPA": 2.8
+    },
+    "description": "Monthly financial support for students pursuing professional, graduate, and postgraduate courses from economically weaker sections. One of India's largest private scholarship programs.",
+    "url": "https://sitaramjindalfoundation.org/",
+    "checklist": [
+      "Download application form from the foundation website",
+      "Fill and submit physical or online application",
+      "Provide income proof for family",
+      "Attach all academic marksheets",
+      "Submit caste/category certificate if applicable",
+      "Obtain school/college principal's recommendation"
+    ]
+  },
+  {
+    "id": "sch-018",
+    "title": "Central Sector Scheme Scholarship – Minorities",
+    "provider": "Ministry of Minority Affairs / NSP",
+    "amount": "Rs 10,000 to Rs 20,000 per year",
+    "deadline": "2026-10-31",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "BCA", "B.Sc", "BA", "B.Com"],
+      "maxFamilyIncomeINR": 200000,
+      "minority": true,
+      "minGPA": 2.8
+    },
+    "description": "Scholarship for minority community students (Muslim, Christian, Sikh, Buddhist, Jain, Zoroastrian) to pursue higher education and enhance their employment prospects.",
+    "url": "https://scholarships.gov.in/",
+    "checklist": [
+      "Register on National Scholarship Portal (NSP)",
+      "Upload minority community certificate",
+      "Provide family income certificate",
+      "Attach all academic transcripts",
+      "Complete Aadhaar-bank linking (PFMS)",
+      "Submit bonafide certificate from institution"
+    ]
+  },
+  {
+    "id": "sch-019",
+    "title": "INSPIRE Scholarship for Higher Education (SHE)",
+    "provider": "Department of Science and Technology (DST), Govt of India",
+    "amount": "Rs 80,000 per year + Rs 20,000 mentorship grant",
+    "deadline": "2026-11-15",
+    "eligibilityCriteria": {
+      "degree": ["B.Sc", "B.S.", "BS-MS", "Integrated MSc"],
+      "focus": "Natural and Basic Sciences (Physics, Chemistry, Math, Biology, Stats)",
+      "minGPA": 3.5,
+      "year": [1]
+    },
+    "description": "DST's flagship scheme to attract talent to basic sciences. For students who score in top 1% in Class 12 board exams and pursue science UG. Includes summer research internship grants.",
+    "url": "https://online-inspire.gov.in/",
+    "checklist": [
+      "Check eligibility (top 1% in board exams)",
+      "Register on the INSPIRE portal",
+      "Submit Class 12 board marksheet",
+      "Provide admission proof in eligible B.Sc / BS programme",
+      "Upload income certificate if applicable",
+      "Link bank account for disbursement"
+    ]
+  },
+  {
+    "id": "sch-020",
+    "title": "PRAGATI Scholarship for Girls – AICTE",
+    "provider": "AICTE / Ministry of Education",
+    "amount": "Rs 50,000 per year (tuition) + Rs 30,000 (incidentals)",
+    "deadline": "2026-11-30",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "B.Pharm", "Diploma in Engg"],
+      "gender": "Female",
+      "maxFamilyIncomeINR": 800000,
+      "year": [1, 2, 3, 4]
+    },
+    "description": "AICTE scholarship for women students in technical education. One scholarship per family. Covers fees and educational expenses. Disbursed via DBT directly to student account.",
+    "url": "https://www.aicte-pragati-saksham-gov.in/",
+    "checklist": [
+      "Apply on AICTE PRAGATI portal (studentdevelopment.in)",
+      "Verify that admission is in an AICTE-approved institution",
+      "Submit family income certificate",
+      "Provide 12th marks and admission letter",
+      "Upload Aadhaar and bank account details",
+      "Confirm only one girl from the family is applying"
+    ]
+  },
+  {
+    "id": "sch-021",
+    "title": "Endowment Fund Scholarship – IIT Alumni Network",
+    "provider": "IIT Alumni Foundation",
+    "amount": "Rs 1,50,000 to Rs 2,50,000 per year",
+    "deadline": "2026-12-05",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "M.Tech", "B.Sc", "MS"],
+      "institution": ["IITs", "NITs", "IISERs", "IISc"],
+      "maxFamilyIncomeINR": 1000000,
+      "minGPA": 3.4
+    },
+    "description": "Endowment-funded scholarships for meritorious students at IITs, NITs, and IISERs who come from economically challenged families. Includes alumni mentoring network access.",
+    "url": "https://www.iitalumni.com/scholarships",
+    "checklist": [
+      "Apply through your institution's scholarship office",
+      "Submit CGPA transcript verified by the institute",
+      "Provide family income affidavit (notarized)",
+      "Write a personal statement on academic and financial need",
+      "Obtain faculty mentor's endorsement letter",
+      "Provide bank account details for NEFT disbursement"
+    ]
+  },
+  {
+    "id": "sch-022",
+    "title": "OPJEMS – O.P. Jindal Engineering and Management Scholarship",
+    "provider": "JSW Foundation / O.P. Jindal Group",
+    "amount": "Up to Rs 2,00,000 per year",
+    "deadline": "2026-10-18",
+    "eligibilityCriteria": {
+      "degree": ["B.Tech", "B.E.", "MBA"],
+      "institution": ["IITs", "NITs", "IIMs", "Top Engineering Colleges"],
+      "minGPA": 3.5,
+      "year": [1, 2]
+    },
+    "description": "Merit scholarship for top students at IITs, NITs, and IIMs pursuing engineering or management. Recognizes academic brilliance and leadership potential. Selection includes personal interviews.",
+    "url": "https://www.opjems.com/",
+    "checklist": [
+      "Apply online on the OPJEMS portal",
+      "Provide entrance exam scorecard (JEE/CAT/GATE)",
+      "Submit latest academic transcript",
+      "Obtain two recommendation letters (one from HOD)",
+      "Write a 600-word essay on your leadership experience",
+      "Attend a virtual interview with the scholarship committee"
+    ]
+  }
+]

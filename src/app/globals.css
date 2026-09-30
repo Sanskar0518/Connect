@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background & Surfaces (Slate 50 / White / Slate 200) */
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Brand Primary: Indigo 600 */
+    --primary: 243 75% 59%;
+    --primary-foreground: 210 40% 98%;
+    --primary-hover: 244 76% 51%;
+
+    /* Secondary: Teal 500 */
+    --secondary: 174 78% 41%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* Accent: Amber 500 (XP, Streaks) */
+    --accent: 38 92% 50%;
+    --accent-foreground: 24 10% 10%;
+
+    /* Muted & Borders: Slate 100 / 200 / 600 */
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215 16% 47%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 243 75% 59%;
+
+    /* Severity / Status */
+    --success: 152 76% 36%;
+    --warning: 38 92% 50%;
+    --danger: 0 84% 60%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Radii */
+    --radius: 0.75rem; /* 12px for cards */
+  }
+
+  .dark {
+    /* Background & Surfaces (Slate 950 / Slate 900 / Slate 800) */
+    --background: 222 47% 7%;
+    --foreground: 210 40% 98%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
+
+    /* Brand Primary: Indigo 400 */
+    --primary: 239 84% 67%;
+    --primary-foreground: 222 47% 11%;
+    --primary-hover: 243 75% 59%;
+
+    /* Secondary: Teal 400 */
+    --secondary: 172 66% 50%;
+    --secondary-foreground: 222 47% 11%;
+
+    /* Accent: Amber 400 */
+    --accent: 43 96% 56%;
+    --accent-foreground: 222 47% 11%;
+
+    /* Muted & Borders: Slate 800 / Slate 400 */
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+    --border: 217 33% 19%;
+    --input: 217 33% 19%;
+    --ring: 239 84% 67%;
+
+    /* Status Dark */
+    --success: 152 76% 45%;
+    --warning: 43 96% 56%;
+    --danger: 0 84% 68%;
+    --destructive: 0 84% 68%;
+    --destructive-foreground: 210 40% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased font-sans;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground));
+}

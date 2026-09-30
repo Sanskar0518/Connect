@@ -1,0 +1,217 @@
+[
+  {
+    "name": "Google",
+    "slug": "google",
+    "industry": "Technology / Cloud / Search",
+    "description": "Global technology leader in search, cloud computing, software, and hardware.",
+    "culture": "Engineering-first, scale-oriented, heavy emphasis on algorithmic rigor and peer collaboration.",
+    "techStack": ["Python", "C++", "Java", "Go", "Kubernetes", "Angular", "TensorFlow"],
+    "benchmarks": [
+      {
+        "role": "Software Engineer",
+        "minReadiness": 85,
+        "skillWeights": {
+          "Data Structures & Algorithms": 95,
+          "System Design": 85,
+          "Python": 80,
+          "Problem Solving": 90,
+          "Linux / Bash": 75,
+          "Unit & Integration Testing": 80
+        }
+      }
+    ]
+  },
+  {
+    "name": "Microsoft",
+    "slug": "microsoft",
+    "industry": "Enterprise Software & Cloud",
+    "description": "Developer of enterprise platforms, Azure cloud services, and developer tooling.",
+    "culture": "Growth mindset, customer obsession, cross-group collaboration, and accessibility.",
+    "techStack": ["TypeScript", "C#", ".NET", "Azure", "React", "Python", "SQL"],
+    "benchmarks": [
+      {
+        "role": "Full Stack Developer",
+        "minReadiness": 80,
+        "skillWeights": {
+          "TypeScript": 85,
+          "React": 85,
+          "RESTful API Design": 80,
+          "SQL": 75,
+          "CI/CD Pipelines": 70,
+          "Team Collaboration": 85
+        }
+      }
+    ]
+  },
+  {
+    "name": "Amazon",
+    "slug": "amazon",
+    "industry": "E-Commerce & Cloud Computing",
+    "description": "E-commerce pioneer and provider of Amazon Web Services (AWS).",
+    "culture": "Guided by Leadership Principles: Customer Obsession, Ownership, Bias for Action, and Deliver Results.",
+    "techStack": ["Java", "AWS", "Python", "Docker", "Linux / Bash", "Kafka", "PostgreSQL"],
+    "benchmarks": [
+      {
+        "role": "Backend Engineer",
+        "minReadiness": 82,
+        "skillWeights": {
+          "Java": 85,
+          "AWS": 85,
+          "System Design": 80,
+          "Data Structures & Algorithms": 85,
+          "Problem Solving": 90,
+          "Microservices Architecture": 80
+        }
+      }
+    ]
+  },
+  {
+    "name": "Meta",
+    "slug": "meta",
+    "industry": "Social Media & Metaverse",
+    "description": "Creator of social technologies, React, PyTorch, and immersive computing platforms.",
+    "culture": "Move fast, focus on high-leverage impact, open-source contribution, and deep autonomy.",
+    "techStack": ["React", "Python", "PyTorch", "C++", "GraphQL", "TypeScript"],
+    "benchmarks": [
+      {
+        "role": "Frontend Engineer",
+        "minReadiness": 85,
+        "skillWeights": {
+          "React": 95,
+          "JavaScript": 90,
+          "TypeScript": 85,
+          "HTML5 & CSS3": 85,
+          "RESTful API Design": 80,
+          "Problem Solving": 85
+        }
+      }
+    ]
+  },
+  {
+    "name": "TCS (Tata Consultancy Services)",
+    "slug": "tcs",
+    "industry": "IT Services & Consulting",
+    "description": "Global IT services, consulting, and business solutions leader.",
+    "culture": "Structured execution, customer service excellence, formal training, and global delivery.",
+    "techStack": ["Java", "Spring Boot", "SQL", "HTML5 & CSS3", "Python", "Agile & Scrum Methodologies"],
+    "benchmarks": [
+      {
+        "role": "Software Engineer",
+        "minReadiness": 70,
+        "skillWeights": {
+          "Java": 75,
+          "SQL": 75,
+          "Problem Solving": 70,
+          "Written Communication": 75,
+          "Team Collaboration": 75,
+          "Agile & Scrum Methodologies": 70
+        }
+      }
+    ]
+  },
+  {
+    "name": "Infosys",
+    "slug": "infosys",
+    "industry": "Digital Services & Consulting",
+    "description": "Pioneer in digital transformation and enterprise application engineering.",
+    "culture": "Learnability, ethical governance, training focus, and client-centricity.",
+    "techStack": ["Python", "Java", "SQL", "React", "Cloud Computing", "Docker"],
+    "benchmarks": [
+      {
+        "role": "Systems Engineer",
+        "minReadiness": 70,
+        "skillWeights": {
+          "Python": 75,
+          "SQL": 70,
+          "Data Structures & Algorithms": 70,
+          "Verbal Presentation": 70,
+          "Adaptability": 80
+        }
+      }
+    ]
+  },
+  {
+    "name": "Deloitte",
+    "slug": "deloitte",
+    "industry": "Management Consulting & Advisory",
+    "description": "Audit, consulting, advisory, and enterprise risk management services.",
+    "culture": "Client relationship driven, analytical rigor, executive presentation, and business strategy.",
+    "techStack": ["SQL", "Python", "Data Visualization (Tableau/PowerBI)", "Financial Modeling"],
+    "benchmarks": [
+      {
+        "role": "Data & Technology Consultant",
+        "minReadiness": 75,
+        "skillWeights": {
+          "SQL": 80,
+          "Data Visualization (Tableau/PowerBI)": 85,
+          "Verbal Presentation": 85,
+          "Problem Solving": 80,
+          "Written Communication": 80
+        }
+      }
+    ]
+  },
+  {
+    "name": "Stripe",
+    "slug": "stripe",
+    "industry": "Fintech & Payments",
+    "description": "Financial infrastructure for the internet, providing payment gateway and billing APIs.",
+    "culture": "Extreme craft, rigorous documentation, developer-first empathy, and high bar for code quality.",
+    "techStack": ["Ruby", "TypeScript", "Go", "PostgreSQL", "Kafka", "AWS"],
+    "benchmarks": [
+      {
+        "role": "Software Engineer",
+        "minReadiness": 88,
+        "skillWeights": {
+          "TypeScript": 90,
+          "RESTful API Design": 95,
+          "PostgreSQL": 85,
+          "Written Communication": 90,
+          "Unit & Integration Testing": 85
+        }
+      }
+    ]
+  },
+  {
+    "name": "Netflix",
+    "slug": "netflix",
+    "industry": "Entertainment & Streaming",
+    "description": "Global entertainment streaming service and content studio.",
+    "culture": "Freedom and responsibility, stunning colleagues, high talent density, and extreme candor.",
+    "techStack": ["Java", "Node.js", "React", "AWS", "Kafka", "Docker"],
+    "benchmarks": [
+      {
+        "role": "Full Stack Engineer",
+        "minReadiness": 86,
+        "skillWeights": {
+          "React": 90,
+          "Node.js": 85,
+          "System Design": 85,
+          "Microservices Architecture": 85,
+          "Problem Solving": 90
+        }
+      }
+    ]
+  },
+  {
+    "name": "OpenAI",
+    "slug": "openai",
+    "industry": "Artificial Intelligence Research & Deployment",
+    "description": "AI research and deployment company behind GPT-4, ChatGPT, and Codex.",
+    "culture": "Rapid velocity, mission-oriented, pushing frontier capabilities in generative AI.",
+    "techStack": ["Python", "PyTorch", "Kubernetes", "TypeScript", "Next.js"],
+    "benchmarks": [
+      {
+        "role": "AI Applications Engineer",
+        "minReadiness": 88,
+        "skillWeights": {
+          "Python": 95,
+          "TypeScript": 85,
+          "Next.js": 80,
+          "RESTful API Design": 85,
+          "Problem Solving": 95
+        }
+      }
+    ]
+  }
+]
