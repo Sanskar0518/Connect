@@ -108,11 +108,11 @@ export default function DeadlineTracker() {
   };
 
   const urgencyConfig = {
-    overdue: { label: "Overdue", color: "text-red-400", bg: "bg-red-500/10 border-red-500/30", dot: "bg-red-400" },
-    critical: { label: "Due in 3 days", color: "text-orange-400", bg: "bg-orange-500/10 border-orange-500/30", dot: "bg-orange-400" },
-    soon: { label: "Due this week", color: "text-amber-400", bg: "bg-amber-500/10 border-amber-500/30", dot: "bg-amber-400" },
-    upcoming: { label: "Upcoming", color: "text-blue-400", bg: "bg-blue-500/10 border-blue-500/30", dot: "bg-blue-400" },
-    none: { label: "No deadline", color: "text-white/30", bg: "bg-white/5 border-white/10", dot: "bg-white/20" },
+    overdue: { label: "Overdue", color: "text-rose-600 dark:text-red-400", bg: "bg-rose-50 dark:bg-red-500/10 border-rose-300 dark:border-red-500/30", dot: "bg-rose-500 dark:bg-red-400" },
+    critical: { label: "Due in 3 days", color: "text-orange-600 dark:text-orange-400", bg: "bg-orange-50 dark:bg-orange-500/10 border-orange-300 dark:border-orange-500/30", dot: "bg-orange-500 dark:bg-orange-400" },
+    soon: { label: "Due this week", color: "text-amber-600 dark:text-amber-400", bg: "bg-amber-50 dark:bg-amber-500/10 border-amber-300 dark:border-amber-500/30", dot: "bg-amber-500 dark:bg-amber-400" },
+    upcoming: { label: "Upcoming", color: "text-blue-600 dark:text-blue-400", bg: "bg-blue-50 dark:bg-blue-500/10 border-blue-300 dark:border-blue-500/30", dot: "bg-blue-500 dark:bg-blue-400" },
+    none: { label: "No deadline", color: "text-muted-foreground", bg: "bg-card border-border", dot: "bg-muted-foreground/40" },
   };
 
   const filtered =
@@ -156,16 +156,16 @@ export default function DeadlineTracker() {
       {stats && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {[
-            { label: "Total Tracked", value: stats.total, color: "text-white", icon: Calendar },
-            { label: "Overdue", value: stats.overdue, color: "text-red-400", icon: AlertTriangle },
-            { label: "Critical (≤3d)", value: stats.critical, color: "text-orange-400", icon: Clock },
-            { label: "Applied", value: stats.applied, color: "text-emerald-400", icon: CheckCircle },
+            { label: "Total Tracked", value: stats.total, color: "text-foreground", icon: Calendar },
+            { label: "Overdue", value: stats.overdue, color: "text-rose-600 dark:text-red-400", icon: AlertTriangle },
+            { label: "Critical (≤3d)", value: stats.critical, color: "text-orange-600 dark:text-orange-400", icon: Clock },
+            { label: "Applied", value: stats.applied, color: "text-emerald-600 dark:text-emerald-400", icon: CheckCircle },
           ].map(({ label, value, color, icon: Icon }) => (
-            <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center gap-3">
+            <div key={label} className="bg-card border border-border rounded-2xl p-4 flex items-center gap-3 shadow-sm">
               <Icon className={`w-5 h-5 ${color}`} />
               <div>
                 <p className={`text-xl font-bold ${color}`}>{value}</p>
-                <p className="text-white/40 text-xs">{label}</p>
+                <p className="text-muted-foreground text-xs">{label}</p>
               </div>
             </div>
           ))}
@@ -175,24 +175,24 @@ export default function DeadlineTracker() {
       {/* Header Controls */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-2">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-sm">
             <Calendar className="w-4 h-4 text-white" />
           </div>
           <div>
-            <h2 className="font-semibold text-white">Deadline Tracker</h2>
-            <p className="text-white/40 text-xs">{deadlines.length} items tracked</p>
+            <h2 className="font-semibold text-foreground">Deadline Tracker</h2>
+            <p className="text-muted-foreground text-xs">{deadlines.length} items tracked</p>
           </div>
         </div>
         <div className="flex gap-2">
           <button
             onClick={fetchDeadlines}
-            className="p-2 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
+            className="p-2 rounded-xl bg-muted hover:bg-muted/80 border border-border text-muted-foreground hover:text-foreground transition-colors"
           >
-            <RefreshCw className="w-4 h-4 text-white/50" />
+            <RefreshCw className="w-4 h-4" />
           </button>
           <button
             onClick={() => setShowAddForm((v) => !v)}
-            className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-500 rounded-xl text-white text-sm font-medium transition-colors"
+            className="flex items-center gap-2 px-4 py-2 bg-amber-600 hover:bg-amber-500 rounded-xl text-white text-sm font-medium transition-colors shadow-sm"
           >
             <Plus className="w-4 h-4" />
             Track Deadline
@@ -202,40 +202,40 @@ export default function DeadlineTracker() {
 
       {/* Add Form */}
       {showAddForm && (
-        <div className="bg-white/5 border border-amber-500/20 rounded-2xl p-5 space-y-4">
-          <h3 className="text-white font-semibold text-sm">Add New Deadline</h3>
+        <div className="bg-card border border-amber-500/30 rounded-2xl p-5 space-y-4 shadow-sm">
+          <h3 className="text-foreground font-semibold text-sm">Add New Deadline</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs text-white/50 mb-1">Title *</label>
+              <label className="block text-xs text-muted-foreground mb-1">Title *</label>
               <input
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm placeholder-white/30 focus:outline-none focus:border-amber-500"
+                className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-amber-500"
                 placeholder="e.g. Google SWE Internship"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
               />
             </div>
             <div>
-              <label className="block text-xs text-white/50 mb-1">Organization *</label>
+              <label className="block text-xs text-muted-foreground mb-1">Organization *</label>
               <input
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm placeholder-white/30 focus:outline-none focus:border-amber-500"
+                className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-amber-500"
                 placeholder="e.g. Google"
                 value={form.organization}
                 onChange={(e) => setForm({ ...form, organization: e.target.value })}
               />
             </div>
             <div>
-              <label className="block text-xs text-white/50 mb-1">Deadline</label>
+              <label className="block text-xs text-muted-foreground mb-1">Deadline</label>
               <input
                 type="date"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-amber-500"
+                className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-foreground text-sm focus:outline-none focus:border-amber-500"
                 value={form.deadline}
                 onChange={(e) => setForm({ ...form, deadline: e.target.value })}
               />
             </div>
             <div>
-              <label className="block text-xs text-white/50 mb-1">URL</label>
+              <label className="block text-xs text-muted-foreground mb-1">URL</label>
               <input
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm placeholder-white/30 focus:outline-none focus:border-amber-500"
+                className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-amber-500"
                 placeholder="https://..."
                 value={form.url}
                 onChange={(e) => setForm({ ...form, url: e.target.value })}
@@ -243,10 +243,10 @@ export default function DeadlineTracker() {
             </div>
           </div>
           <div>
-            <label className="block text-xs text-white/50 mb-1">Notes</label>
+            <label className="block text-xs text-muted-foreground mb-1">Notes</label>
             <textarea
               rows={2}
-              className="w-full bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-white text-sm placeholder-white/30 focus:outline-none focus:border-amber-500 resize-none"
+              className="w-full bg-muted border border-border rounded-xl px-3 py-2 text-foreground text-sm placeholder:text-muted-foreground focus:outline-none focus:border-amber-500 resize-none"
               placeholder="Any notes..."
               value={form.notes}
               onChange={(e) => setForm({ ...form, notes: e.target.value })}
@@ -255,14 +255,14 @@ export default function DeadlineTracker() {
           <div className="flex gap-2 justify-end">
             <button
               onClick={() => setShowAddForm(false)}
-              className="px-4 py-2 rounded-xl bg-white/5 text-white/50 text-sm hover:bg-white/10 transition-colors"
+              className="px-4 py-2 rounded-xl bg-muted text-muted-foreground text-sm hover:text-foreground hover:bg-muted/80 transition-colors"
             >
               Cancel
             </button>
             <button
               onClick={handleAdd}
               disabled={saving || !form.title || !form.organization}
-              className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-sm font-medium transition-colors disabled:opacity-50"
+              className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white text-sm font-medium transition-colors disabled:opacity-50 shadow-sm"
             >
               {saving ? "Saving…" : "Add Deadline"}
             </button>
@@ -284,8 +284,8 @@ export default function DeadlineTracker() {
             onClick={() => setFilter(key)}
             className={`px-3 py-1.5 rounded-xl font-medium capitalize transition-all ${
               filter === key
-                ? "bg-amber-600 text-white"
-                : "bg-white/5 text-white/50 hover:bg-white/10 hover:text-white"
+                ? "bg-amber-600 text-white shadow-sm"
+                : "bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80 border border-border"
             }`}
           >
             {label}
@@ -295,8 +295,8 @@ export default function DeadlineTracker() {
 
       {/* Grouped Deadline List */}
       {filtered.length === 0 ? (
-        <div className="text-center py-16 text-white/30">
-          <Calendar className="w-10 h-10 mx-auto mb-3 opacity-30" />
+        <div className="text-center py-16 text-muted-foreground border border-dashed border-border rounded-2xl">
+          <Calendar className="w-10 h-10 mx-auto mb-3 opacity-30 text-muted-foreground" />
           <p>No deadlines found. Add one above!</p>
         </div>
       ) : (
@@ -312,11 +312,11 @@ export default function DeadlineTracker() {
                 >
                   <span className={`w-2 h-2 rounded-full ${cfg.dot} flex-shrink-0`} />
                   <span className={`text-sm font-semibold ${cfg.color}`}>{cfg.label}</span>
-                  <span className="text-white/30 text-xs ml-1">({items.length})</span>
+                  <span className="text-muted-foreground text-xs ml-1">({items.length})</span>
                   {collapsed ? (
-                    <ChevronDown className="w-4 h-4 text-white/30 ml-auto" />
+                    <ChevronDown className="w-4 h-4 text-muted-foreground ml-auto" />
                   ) : (
-                    <ChevronUp className="w-4 h-4 text-white/30 ml-auto" />
+                    <ChevronUp className="w-4 h-4 text-muted-foreground ml-auto" />
                   )}
                 </button>
                 {!collapsed && (
@@ -324,7 +324,7 @@ export default function DeadlineTracker() {
                     {items.map((item) => (
                       <div
                         key={item.id}
-                        className={`border rounded-xl p-4 flex items-start gap-4 ${cfg.bg}`}
+                        className={`border rounded-xl p-4 flex items-start gap-4 ${cfg.bg} shadow-sm`}
                       >
                         {/* Type Tag */}
                         <div className="flex-shrink-0 text-lg">
@@ -335,13 +335,13 @@ export default function DeadlineTracker() {
                         <div className="flex-1 min-w-0">
                           <div className="flex items-start justify-between gap-2 flex-wrap">
                             <div>
-                              <p className="text-white font-medium text-sm truncate">{item.title}</p>
-                              <p className="text-white/50 text-xs">{item.organization}</p>
+                              <p className="text-foreground font-semibold text-sm truncate">{item.title}</p>
+                              <p className="text-muted-foreground text-xs">{item.organization}</p>
                             </div>
                             <div className="flex items-center gap-2 flex-shrink-0">
                               {item.deadline && (
                                 <div className="flex items-center gap-1">
-                                  <Clock className="w-3 h-3 text-white/40" />
+                                  <Clock className="w-3 h-3 text-muted-foreground" />
                                   <span className={`text-xs font-semibold ${cfg.color}`}>
                                     {item.daysUntil !== null && item.daysUntil < 0
                                       ? `${Math.abs(item.daysUntil)}d overdue`
@@ -356,9 +356,9 @@ export default function DeadlineTracker() {
                                   href={item.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="p-1 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                                  className="p-1.5 rounded-lg bg-card border border-border hover:bg-muted text-muted-foreground hover:text-foreground transition-colors"
                                 >
-                                  <ExternalLink className="w-3 h-3 text-white/50" />
+                                  <ExternalLink className="w-3.5 h-3.5" />
                                 </a>
                               )}
                             </div>
@@ -370,20 +370,20 @@ export default function DeadlineTracker() {
                               <select
                                 value={item.status}
                                 onChange={(e) => handleStatusChange(item.id, e.target.value)}
-                                className="bg-white/10 border border-white/20 rounded-lg px-2 py-1 text-xs text-white focus:outline-none"
+                                className="bg-card border border-border rounded-lg px-2 py-1 text-xs text-foreground focus:outline-none"
                               >
                                 {COLUMNS.map((c) => (
-                                  <option key={c} value={c} className="bg-gray-900">
+                                  <option key={c} value={c} className="bg-background text-foreground">
                                     {c}
                                   </option>
                                 ))}
                               </select>
                               {item.notes && (
-                                <span className="text-white/40 text-xs truncate max-w-xs">{item.notes}</span>
+                                <span className="text-muted-foreground text-xs truncate max-w-xs">{item.notes}</span>
                               )}
                               <button
                                 onClick={() => handleDelete(item.id)}
-                                className="ml-auto p-1 rounded-lg hover:bg-red-500/20 text-white/30 hover:text-red-400 transition-colors"
+                                className="ml-auto p-1.5 rounded-lg hover:bg-destructive/10 text-muted-foreground hover:text-destructive transition-colors"
                               >
                                 <Trash2 className="w-3.5 h-3.5" />
                               </button>
@@ -393,9 +393,9 @@ export default function DeadlineTracker() {
                           {/* Scholarship amount */}
                           {item.type === "SCHOLARSHIP" && item.amount && (
                             <div className="mt-1 flex items-center gap-2">
-                              <TrendingUp className="w-3 h-3 text-emerald-400" />
-                              <span className="text-emerald-400 text-xs font-medium">{item.amount}</span>
-                              <span className="text-white/30 text-xs">• {item.status}</span>
+                              <TrendingUp className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
+                              <span className="text-emerald-600 dark:text-emerald-400 text-xs font-semibold">{item.amount}</span>
+                              <span className="text-muted-foreground text-xs">• {item.status}</span>
                             </div>
                           )}
                         </div>

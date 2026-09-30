@@ -25,9 +25,9 @@ interface Scholarship {
 }
 
 const BADGE_STYLES: Record<string, string> = {
-  Eligible: "bg-emerald-500/15 text-emerald-300 border-emerald-500/30",
-  "Likely Eligible": "bg-amber-500/15 text-amber-300 border-amber-500/30",
-  "Review Criteria": "bg-red-500/15 text-red-300 border-red-500/30",
+  Eligible: "bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30",
+  "Likely Eligible": "bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-500/30",
+  "Review Criteria": "bg-rose-50 dark:bg-rose-500/15 text-rose-700 dark:text-rose-300 border-rose-300 dark:border-rose-500/30",
 };
 
 const BADGE_ICONS: Record<string, React.ElementType> = {
@@ -60,11 +60,11 @@ function ProgressBar({ completed, total }: { completed: number; total: number })
   const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
   return (
     <div className="space-y-1">
-      <div className="flex justify-between text-xs text-white/40">
+      <div className="flex justify-between text-xs text-muted-foreground font-medium">
         <span>{completed}/{total} steps done</span>
         <span>{pct}%</span>
       </div>
-      <div className="h-1.5 bg-white/10 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-muted rounded-full overflow-hidden border border-border">
         <div
           className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full transition-all duration-500"
           style={{ width: pct + "%" }}
@@ -170,22 +170,24 @@ export default function ScholarshipFinderView() {
       {/* Search + Filter */}
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search by name, provider, or keyword..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 bg-white/5 border border-white/10 rounded-xl text-sm text-white placeholder-white/30 focus:outline-none focus:border-cyan-500/50 transition-colors"
+            className="w-full pl-9 pr-4 py-2.5 bg-card border border-border rounded-xl text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-cyan-500/50 transition-colors shadow-sm"
           />
         </div>
-        <div className="flex rounded-xl overflow-hidden border border-white/10">
+        <div className="flex rounded-xl overflow-hidden border border-border bg-muted p-0.5 gap-1">
           {(["all", "eligible", "saved"] as const).map((f) => (
             <button
               key={f}
               onClick={() => setFilter(f)}
-              className={"px-3.5 py-2.5 text-xs font-semibold capitalize transition-colors " + (
-                filter === f ? "bg-cyan-500/20 text-cyan-300" : "text-white/40 hover:text-white/70 bg-white/5"
+              className={"px-3.5 py-2 text-xs font-semibold capitalize rounded-lg transition-all " + (
+                filter === f
+                  ? "bg-cyan-600 text-white shadow-sm"
+                  : "text-muted-foreground hover:text-foreground hover:bg-card/50"
               )}
             >
               {f === "eligible" ? "Best Match" : f}
@@ -194,20 +196,20 @@ export default function ScholarshipFinderView() {
         </div>
       </div>
 
-      <p className="text-xs text-white/40">
+      <p className="text-xs text-muted-foreground">
         {loading ? "Loading..." : filtered.length + " scholarships found"}
       </p>
 
       {loading ? (
         <div className="space-y-4">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-48 rounded-2xl bg-white/5 border border-white/10 animate-pulse" />
+            <div key={i} className="h-48 rounded-2xl bg-card border border-border animate-pulse shadow-sm" />
           ))}
         </div>
       ) : filtered.length === 0 ? (
-        <div className="text-center py-16 text-white/30">
-          <GraduationCap className="w-12 h-12 mx-auto mb-3 opacity-40" />
-          <p className="text-sm">No scholarships found. Try adjusting your filters.</p>
+        <div className="text-center py-16 text-muted-foreground border border-dashed border-border rounded-2xl">
+          <GraduationCap className="w-12 h-12 mx-auto mb-3 opacity-40 text-muted-foreground" />
+          <p className="text-sm font-medium">No scholarships found. Try adjusting your filters.</p>
         </div>
       ) : (
         <div className="space-y-4">
@@ -225,7 +227,7 @@ export default function ScholarshipFinderView() {
             return (
               <div
                 key={s.id}
-                className="rounded-2xl bg-white/5 border border-white/10 hover:border-white/20 transition-all overflow-hidden"
+                className="rounded-2xl bg-card border border-border hover:border-cyan-500/40 dark:hover:border-cyan-500/40 transition-all overflow-hidden shadow-sm"
               >
                 <div className="p-5 space-y-3">
                   <div className="flex items-start justify-between gap-3">
@@ -239,21 +241,21 @@ export default function ScholarshipFinderView() {
                         </span>
                         {days !== null && days > 0 && (
                           <span className={"flex items-center gap-1 text-xs px-2 py-0.5 rounded-full border " + (
-                            days < 7 ? "bg-red-500/15 text-red-300 border-red-500/30"
-                            : days < 21 ? "bg-amber-500/15 text-amber-300 border-amber-500/30"
-                            : "bg-white/5 text-white/40 border-white/10"
+                            days < 7 ? "bg-rose-50 dark:bg-red-500/15 text-rose-700 dark:text-red-300 border-rose-300 dark:border-red-500/30 font-medium"
+                            : days < 21 ? "bg-amber-50 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-300 dark:border-amber-500/30 font-medium"
+                            : "bg-muted text-muted-foreground border-border"
                           )}>
                             <Clock className="w-3 h-3" />
                             {days} days left
                           </span>
                         )}
                       </div>
-                      <h3 className="font-bold text-sm text-white leading-snug">{s.title}</h3>
-                      <div className="flex items-center gap-3 mt-1 text-xs text-white/50">
+                      <h3 className="font-bold text-sm text-foreground leading-snug">{s.title}</h3>
+                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground flex-wrap">
                         <span className="flex items-center gap-1">
                           <Users className="w-3 h-3" /> {s.provider}
                         </span>
-                        <span className="flex items-center gap-1">
+                        <span className="flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400">
                           <DollarSign className="w-3 h-3" /> {s.amount}
                         </span>
                       </div>
@@ -261,7 +263,7 @@ export default function ScholarshipFinderView() {
                     {/* Eligibility ring */}
                     <div className="shrink-0 relative w-12 h-12">
                       <svg className="w-12 h-12 -rotate-90" viewBox="0 0 36 36">
-                        <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="3" />
+                        <circle cx="18" cy="18" r="15" fill="none" className="stroke-muted-foreground/20 dark:stroke-white/10" strokeWidth="3" />
                         <circle
                           cx="18" cy="18" r="15" fill="none"
                           stroke={eligibilityScore >= 80 ? "#10b981" : eligibilityScore >= 50 ? "#f59e0b" : "#ef4444"}
@@ -270,7 +272,7 @@ export default function ScholarshipFinderView() {
                           strokeLinecap="round"
                         />
                       </svg>
-                      <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
+                      <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-foreground">
                         {eligibilityScore}
                       </span>
                     </div>
@@ -279,19 +281,19 @@ export default function ScholarshipFinderView() {
                   {criteriaTagList.length > 0 && (
                     <div className="flex flex-wrap gap-1.5">
                       {criteriaTagList.map((tag) => (
-                        <span key={tag} className="text-xs px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-white/50">
+                        <span key={tag} className="text-xs px-2.5 py-0.5 rounded-full bg-muted border border-border text-muted-foreground font-medium">
                           {tag}
                         </span>
                       ))}
                     </div>
                   )}
 
-                  <p className="text-xs text-white/50 line-clamp-2">{s.description}</p>
+                  <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{s.description}</p>
 
-                  <div className="flex items-center justify-between pt-1">
+                  <div className="flex items-center justify-between pt-1 flex-wrap gap-2">
                     <button
                       onClick={() => setExpanded(isOpen ? null : s.id)}
-                      className="flex items-center gap-1 text-xs text-cyan-400/80 hover:text-cyan-300 transition-colors"
+                      className="flex items-center gap-1 text-xs text-cyan-600 dark:text-cyan-400 hover:underline font-medium transition-colors"
                     >
                       {isOpen ? (
                         <><ChevronUp className="w-3.5 h-3.5" /> Hide checklist</>
@@ -305,8 +307,8 @@ export default function ScholarshipFinderView() {
                         disabled={!!isSaved || saving === s.id}
                         className={"flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold border transition-all " + (
                           isSaved
-                            ? "bg-emerald-500/15 text-emerald-300 border-emerald-500/30 cursor-default"
-                            : "bg-white/5 text-white/60 border-white/10 hover:bg-cyan-500/10 hover:text-cyan-300 hover:border-cyan-500/30"
+                            ? "bg-emerald-50 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-300 dark:border-emerald-500/30 cursor-default"
+                            : "bg-muted text-foreground border-border hover:bg-cyan-500/10 hover:text-cyan-600 dark:hover:text-cyan-300 hover:border-cyan-500/30"
                         )}
                       >
                         {isSaved ? (
@@ -321,7 +323,7 @@ export default function ScholarshipFinderView() {
                         href={s.url}
                         target="_blank"
                         rel="noreferrer"
-                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-500/25 transition-all"
+                        className="flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-semibold bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white shadow-sm transition-all"
                       >
                         Apply <ExternalLink className="w-3 h-3" />
                       </a>
@@ -331,7 +333,7 @@ export default function ScholarshipFinderView() {
 
                 {/* Expandable checklist */}
                 {isOpen && (
-                  <div className="border-t border-white/10 p-5 space-y-3 bg-white/[0.03]">
+                  <div className="border-t border-border p-5 space-y-3 bg-muted/30">
                     <ProgressBar completed={completedItems.length} total={s.checklist.length} />
                     <ul className="space-y-2">
                       {s.checklist.map((item, idx) => {
@@ -342,18 +344,18 @@ export default function ScholarshipFinderView() {
                             <button
                               onClick={() => toggleChecklistItem(s.id, item)}
                               disabled={togglingItem === itemKey}
-                              className="w-full flex items-start gap-3 text-left hover:bg-white/5 p-1.5 rounded-lg transition-colors"
+                              className="w-full flex items-start gap-3 text-left hover:bg-muted/60 p-2 rounded-lg transition-colors border border-transparent hover:border-border"
                             >
                               <span className="shrink-0 mt-0.5">
                                 {togglingItem === itemKey ? (
-                                  <div className="w-4 h-4 border border-cyan-500/50 border-t-transparent rounded-full animate-spin" />
+                                  <div className="w-4 h-4 border border-cyan-500 border-t-transparent rounded-full animate-spin" />
                                 ) : done ? (
-                                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                                  <CheckCircle2 className="w-4 h-4 text-emerald-500" />
                                 ) : (
-                                  <Circle className="w-4 h-4 text-white/20" />
+                                  <Circle className="w-4 h-4 text-muted-foreground/40" />
                                 )}
                               </span>
-                              <span className={"text-xs leading-relaxed " + (done ? "text-white/30 line-through" : "text-white/70")}>
+                              <span className={"text-xs leading-relaxed " + (done ? "text-muted-foreground line-through" : "text-foreground font-medium")}>
                                 {item}
                               </span>
                             </button>

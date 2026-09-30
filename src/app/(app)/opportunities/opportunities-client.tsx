@@ -51,36 +51,37 @@ export default function OpportunitiesClient() {
 
   return (
     <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
               Opportunities &amp; Financial Aid
             </h1>
-            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 rounded-full text-xs font-semibold">
+            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 border border-cyan-500/30 rounded-full text-xs font-semibold">
               <Sparkles className="w-3 h-3" />
               AI-Matched
             </span>
           </div>
-          <p className="text-sm text-white/50 mt-1">
+          <p className="text-sm text-muted-foreground mt-1">
             Discover internships, scholarships, and government schemes tailored to your profile.
           </p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex border-b border-white/10 gap-1">
+      <div className="flex border-b border-border gap-1 overflow-x-auto">
         {TABS.map((tab) => {
           const Icon = tab.icon;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={"flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-colors -mb-px " + (
-                activeTab === tab.id
-                  ? "border-cyan-400 text-cyan-400"
-                  : "border-transparent text-white/40 hover:text-white/70"
-              )}
+              className={
+                "flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 transition-colors -mb-px whitespace-nowrap " +
+                (activeTab === tab.id
+                  ? "border-cyan-500 text-cyan-600 dark:text-cyan-400 font-bold"
+                  : "border-transparent text-muted-foreground hover:text-foreground")
+              }
             >
               <Icon className="w-4 h-4" />
               {tab.label}
@@ -90,9 +91,11 @@ export default function OpportunitiesClient() {
       </div>
 
       {/* Tab Content */}
-      {activeTab === "matcher" && <JobMatcher />}
-      {activeTab === "scholarships" && <ScholarshipFinderView />}
-      {activeTab === "government" && <GovOpportunitiesView />}
+      <div className="pt-2">
+        {activeTab === "matcher" && <JobMatcher />}
+        {activeTab === "scholarships" && <ScholarshipFinderView />}
+        {activeTab === "government" && <GovOpportunitiesView />}
+      </div>
     </div>
   );
 }
