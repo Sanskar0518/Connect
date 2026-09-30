@@ -10,6 +10,7 @@ const nextConfig = {
     ],
   },
   experimental: {
+    serverComponentsExternalPackages: ['pdf-parse', '@napi-rs/canvas', 'pdfjs-dist'],
     outputFileTracingIncludes: {
       '/**': ['./prisma/seed.db'],
     },

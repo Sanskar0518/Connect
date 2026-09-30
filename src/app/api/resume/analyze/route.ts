@@ -109,10 +109,12 @@ export async function POST(req: NextRequest) {
       }
 
       try {
-        resumeText = await extractTextFromDocument(fileBuffer, mime);
+        resumeText = await extractTextFromDocument(fileBuffer, mime, fileName);
       } catch (parseErr) {
-        console.warn("Document parsing error, falling back to text decode:", parseErr);
-        resumeText = fileBuffer.toString("utf-8");
+        console.warn("Document parsing error, attempting text decode:", parseErr);
+        if (!fileName.toLowerCase().endsWith(".pdf")) {
+          resumeText = fileBuffer.toString("utf-8");
+        }
       }
     } else if (textParam) {
       resumeText = textParam;
