@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export interface GenerateStructuredOptions<T> {
   prompt: string;
-  schema: z.ZodType<T>;
+  schema: z.ZodType<T, any, any>;
   system?: string;
   temperature?: number;
   cacheKey?: string;

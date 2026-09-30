@@ -8,7 +8,7 @@ import { retryWithCorrection } from "./retry";
  */
 async function generateWithGroq<T>(
   prompt: string,
-  schema: import("zod").ZodType<T>,
+  schema: import("zod").ZodType<T, any, any>,
   system?: string
 ): Promise<T | null> {
   const groqApiKey = process.env.GROQ_API_KEY;
@@ -69,44 +69,55 @@ export async function generateStructured<T>(
 
   // 2. Try Gemini API
   if (apiKey) {
-    try {
-      const genAI = new GoogleGenerativeAI(apiKey);
-      // Use available gemini-flash-latest model
-      const model = genAI.getGenerativeModel({
-        model: "gemini-flash-latest",
-        systemInstruction:
-          (system ? `${system}\n` : "") +
-          "You are an AI career readiness assistant for students. Always respond strictly in valid JSON matching the requested schema without any markdown wrappers or outside commentary.",
-        generationConfig: {
-          responseMimeType: "application/json",
-          temperature,
-        },
-      });
+    const candidateModels = [
+      "gemini-3.1-flash-lite",
+      "gemini-3.8-flash",
+      "gemini-flash-latest",
+      "gemini-2.0-flash",
+    ];
 
-      const { data, retries } = await retryWithCorrection<T>(
-        async (previousError) => {
-          let currentPrompt = prompt;
-          if (previousError) {
-            currentPrompt += `\n\n[CORRECTION REQUIRED]: Your previous output had an issue: ${previousError}`;
-          }
-          const result = await model.generateContent(currentPrompt);
-          return result.response.text();
-        },
-        schema,
-        2
-      );
+    for (const modelName of candidateModels) {
+      try {
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({
+          model: modelName,
+          systemInstruction:
+            (system ? `${system}\n` : "") +
+            "You are an AI career readiness assistant for students. Always respond strictly in valid JSON matching the requested schema without any markdown wrappers or outside commentary.",
+          generationConfig: {
+            responseMimeType: "application/json",
+            temperature,
+          },
+        });
 
-      // Save to Cache
-      setCachedAIResult(effectiveCacheKey, data);
+        const { data, retries } = await retryWithCorrection<T>(
+          async (previousError) => {
+            let currentPrompt = prompt;
+            if (previousError) {
+              currentPrompt += `\n\n[CORRECTION REQUIRED]: Your previous output had an issue: ${previousError}`;
+            }
+            const result = await model.generateContent(currentPrompt);
+            return result.response.text();
+          },
+          schema,
+          2
+        );
 
-      return {
-        data,
-        source: "gemini",
-        confidence: 0.92,
-        retries,
-      };
-    } catch (geminiError) {
-      console.warn("Gemini generation failed, trying Groq fallback...", geminiError);
+        // Save to Cache
+        setCachedAIResult(effectiveCacheKey, data);
+
+        return {
+          data,
+          source: "gemini",
+          confidence: 0.95,
+          retries,
+        };
+      } catch (geminiError) {
+        console.warn(
+          `Gemini model '${modelName}' attempt failed:`,
+          geminiError instanceof Error ? geminiError.message : geminiError
+        );
+      }
     }
   }
 
