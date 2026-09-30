@@ -168,8 +168,13 @@ export default async function DashboardPage() {
         {/* Your Rating Bubble Graphic Card */}
         <div className="p-6 rounded-2xl bg-card border border-border shadow-sm">
           <SkillRatingBubbles
-            title="Your Rating"
+            title="Skill Proficiency"
             subtitle="Core domain mastery across verified curriculum competencies"
+            bubbles={{
+              systemDesign: { percent: 85, label: "System Design" },
+              problemSolving: { percent: 92, label: "Problem Solving" },
+              techStack: { percent: 88, label: "Core Stack" },
+            }}
           />
         </div>
 
