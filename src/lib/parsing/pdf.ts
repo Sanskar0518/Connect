@@ -5,9 +5,11 @@
 
 export async function extractTextFromPDF(buffer: Buffer): Promise<string> {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const pdfParse = require("pdf-parse");
-    const fn = typeof pdfParse === "function" ? pdfParse : pdfParse.default;
+    const pdfParseModule = await import("pdf-parse");
+    const fn =
+      typeof pdfParseModule === "function"
+        ? pdfParseModule
+        : (pdfParseModule as unknown as { default: (buf: Buffer, opts?: { max?: number }) => Promise<{ text: string }> }).default;
     const result = await fn(buffer, { max: 50 });
     return result.text || "";
   } catch (err) {

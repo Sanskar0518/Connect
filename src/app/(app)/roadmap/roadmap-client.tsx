@@ -320,7 +320,7 @@ export function RoadmapClient() {
                   Tip: Click any node to open detailed checkpoints, syllabus objectives, and linked study materials.
                 </span>
                 <span className="font-semibold text-primary">
-                  Click 'Start' or 'Active' to toggle status (+100 XP)
+                  Click &apos;Start&apos; or &apos;Active&apos; to toggle status (+100 XP)
                 </span>
               </div>
 

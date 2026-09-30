@@ -169,7 +169,7 @@ export default function JobMatcher() {
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-white/30">
           <Briefcase className="w-10 h-10 mx-auto mb-3 opacity-30" />
-          <p>No matches in this filter. Try "All".</p>
+          <p>No matches in this filter. Try &quot;All&quot;.</p>
         </div>
       ) : (
         <div className="space-y-3">

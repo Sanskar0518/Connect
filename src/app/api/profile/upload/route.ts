@@ -13,6 +13,7 @@ import { encrypt, sha256 } from "@/lib/security/crypto";
 import { generateStructured } from "@/lib/ai/client";
 import { TranscriptParseResultSchema } from "@/lib/ai/schemas/transcript";
 import { buildTranscriptParsePrompt } from "@/lib/ai/prompts/transcript";
+import { uploadToSupabaseStorage, DEFAULT_STORAGE_BUCKET, isSupabaseConfigured } from "@/lib/supabase";
 
 
 export async function POST(req: NextRequest) {
@@ -167,12 +168,29 @@ export async function POST(req: NextRequest) {
     });
   }
 
+  // Upload document to Supabase Storage if configured
+  let storageUrl: string | null = null;
+  if (isSupabaseConfigured()) {
+    try {
+      const uploadRes = await uploadToSupabaseStorage({
+        bucket: DEFAULT_STORAGE_BUCKET,
+        path: `transcripts/${userId}/${Date.now()}_${safeFileName}`,
+        fileBuffer: buffer,
+        contentType: file.type,
+        upsert: true,
+      });
+      storageUrl = uploadRes.url;
+    } catch (storageErr) {
+      console.warn("Supabase storage upload skipped:", storageErr);
+    }
+  }
+
   // Store encrypted document reference (as a "resume" record for files table)
   await db.resume.create({
     data: {
       userId,
       fileName: safeFileName,
-      fileUrl: `encrypted:${contentHash}`,
+      fileUrl: storageUrl || `encrypted:${contentHash}`,
       fileSize: buffer.length,
       encryptedContent,
     },
@@ -180,6 +198,7 @@ export async function POST(req: NextRequest) {
 
   return NextResponse.json({
     success: true,
+    storageUrl,
     source: aiResult.source,
     confidence: aiResult.confidence,
     extracted: {

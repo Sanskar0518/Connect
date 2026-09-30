@@ -22,19 +22,17 @@ interface RoadmapCanvasProps {
   selectedNodeId?: string | null;
 }
 
+// Define custom node types outside component for React Flow reference stability
+const nodeTypes: NodeTypes = {
+  roadmapNode: CustomRoadmapNode,
+};
+
 export function RoadmapCanvas({
   nodes,
   onSelectNode,
   onToggleStatus,
   selectedNodeId,
 }: RoadmapCanvasProps) {
-  // Define custom node types
-  const nodeTypes: NodeTypes = useMemo(
-    () => ({
-      roadmapNode: CustomRoadmapNode,
-    }),
-    []
-  );
 
   // Group nodes by level to compute clean hierarchical DAG coordinates
   const { flowNodes, flowEdges } = useMemo(() => {

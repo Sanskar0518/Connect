@@ -11,7 +11,7 @@ export interface GenerateStructuredOptions<T> {
 
 export interface AIResponse<T> {
   data: T;
-  source: "gemini" | "cache" | "fallback";
+  source: "gemini" | "groq" | "cache" | "fallback";
   confidence?: number;
   retries?: number;
 }

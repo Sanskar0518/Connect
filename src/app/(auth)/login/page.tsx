@@ -1,42 +1,100 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Compass, Sparkles, ArrowRight, Lock, Mail, AlertCircle, Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
+import { Sparkles, AlertCircle, Loader2 } from "lucide-react";
 import { ThemeToggle } from "@/components/common/theme-toggle";
+import { AuthUI } from "@/components/ui/auth-fuse";
+import { getSupabaseClient } from "@/lib/supabase";
+import { signInWithGooglePopup } from "@/lib/firebase";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [demoLoading, setDemoLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSignIn = async (email: string, password: string) => {
     setError(null);
     setLoading(true);
-
     try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        email: email.trim(),
-        password,
-      });
-
+      const res = await signIn("credentials", { redirect: false, email: email.trim(), password });
       if (res?.error) {
         setError(res.error);
         setLoading(false);
       } else {
+        // Also quietly sign in to Supabase if configured for client-side storage
+        const supabase = getSupabaseClient();
+        if (supabase) {
+          try {
+            await supabase.auth.signInWithPassword({ email: email.trim(), password });
+          } catch {
+            // Ignore Supabase shadow auth errors
+          }
+        }
         router.push("/dashboard");
         router.refresh();
       }
     } catch {
       setError("An unexpected error occurred during sign in.");
       setLoading(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setError(null);
+    setGoogleLoading(true);
+    try {
+      // 1. Try Firebase Google Popup (Instant popup modal)
+      try {
+        const result = await signInWithGooglePopup();
+        if (result?.user?.email) {
+          const idToken = await result.user.getIdToken();
+          const authRes = await signIn("firebase", {
+            idToken,
+            email: result.user.email,
+            name: result.user.displayName || result.user.email.split("@")[0],
+            image: result.user.photoURL || "",
+            redirect: false,
+          });
+
+          if (!authRes?.error) {
+            router.push("/dashboard");
+            router.refresh();
+            return;
+          }
+        }
+      } catch (fbErr: unknown) {
+        const code = (fbErr as { code?: string })?.code;
+        if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+          setGoogleLoading(false);
+          return;
+        }
+        console.info("Firebase Google popup fallback to Supabase/OAuth:", fbErr);
+      }
+
+      // 2. Fallback to Supabase Google OAuth
+      const supabase = getSupabaseClient();
+      if (supabase) {
+        const { error: sbError } = await supabase.auth.signInWithOAuth({
+          provider: "google",
+          options: {
+            redirectTo: `${window.location.origin}/auth/callback`,
+          },
+        });
+        if (sbError) {
+          console.warn("Supabase Google OAuth fallback to NextAuth:", sbError.message);
+          await signIn("google", { callbackUrl: "/dashboard" });
+        }
+      } else {
+        await signIn("google", { callbackUrl: "/dashboard" });
+      }
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : "Failed to initiate Google sign-in";
+      setError(msg);
+      setGoogleLoading(false);
     }
   };
 
@@ -49,7 +107,6 @@ export default function LoginPage() {
         email: "demo@connect.dev",
         password: "Demo1234!",
       });
-
       if (res?.error) {
         setError(res.error);
         setDemoLoading(false);
@@ -64,115 +121,50 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col justify-center items-center bg-background px-4 py-8 relative">
-      <div className="absolute top-4 right-4">
+    <div className="relative min-h-screen bg-black">
+      <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
-
-      <div className="w-full max-w-md space-y-6">
-        {/* Brand Header */}
-        <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-primary text-primary-foreground shadow-md mb-2">
-            <Compass className="w-7 h-7" />
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Welcome to Connect
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            The AI-powered career readiness & talent development platform
-          </p>
-        </div>
-
-        {/* Card */}
-        <div className="p-6 sm:p-8 rounded-2xl bg-card border border-border shadow-sm space-y-6">
-          {/* Quick Demo Student Button */}
-          <button
-            type="button"
-            onClick={handleDemoSignIn}
-            disabled={demoLoading || loading}
-            className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-indigo-700 hover:from-primary-hover hover:to-indigo-800 text-primary-foreground font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 disabled:opacity-50"
-          >
-            {demoLoading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              <Sparkles className="w-4 h-4 text-accent fill-accent" />
-            )}
-            <span>Sign In as Demo Student (Alex Rivera)</span>
-          </button>
-
-          <div className="relative flex items-center justify-center">
-            <div className="border-t border-border w-full" />
-            <span className="bg-card px-3 text-xs text-muted-foreground uppercase tracking-wider font-semibold">
-              Or sign in with email
-            </span>
-          </div>
-
-          {error && (
-            <div className="p-3.5 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm flex items-center gap-2.5">
-              <AlertCircle className="w-4 h-4 shrink-0" />
-              <span>{error}</span>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-foreground">Email Address</label>
-              <div className="relative">
-                <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="email"
-                  required
-                  placeholder="student@university.edu"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted/30 border border-border text-foreground text-sm focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-muted-foreground"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-foreground">Password</label>
-              </div>
-              <div className="relative">
-                <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
-                <input
-                  type="password"
-                  required
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-muted/30 border border-border text-foreground text-sm focus:bg-card focus:outline-none focus:ring-2 focus:ring-primary transition-all placeholder:text-muted-foreground"
-                />
-              </div>
-            </div>
-
+      <AuthUI
+        initialView="signin"
+        onSignInSubmit={handleSignIn}
+        onGoogleSignIn={handleGoogleSignIn}
+        googleLoading={googleLoading}
+        onToggle={() => router.push("/register")}
+        loading={loading}
+        topSlot={
+          <div className="space-y-4">
             <button
-              type="submit"
-              disabled={loading || demoLoading}
-              className="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-hover text-primary-foreground font-semibold text-sm flex items-center justify-center gap-2 transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-primary disabled:opacity-50"
+              type="button"
+              onClick={handleDemoSignIn}
+              disabled={demoLoading || loading}
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-800 hover:from-indigo-500 hover:to-indigo-700 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-black disabled:opacity-50"
             >
-              {loading ? (
-                <Loader2 className="w-4 h-4 animate-spin" />
+              {demoLoading ? (
+                <Loader2 className="size-4 animate-spin" />
               ) : (
-                <>
-                  <span>Sign In</span>
-                  <ArrowRight className="w-4 h-4" />
-                </>
+                <Sparkles className="size-4 text-yellow-400 fill-yellow-400" />
               )}
+              Sign In as Demo Student (Alex Rivera)
             </button>
-          </form>
 
-          <div className="text-center pt-2">
-            <p className="text-xs text-muted-foreground">
-              Don&apos;t have an account?{" "}
-              <Link href="/register" className="font-semibold text-primary hover:underline">
-                Create Account
-              </Link>
-            </p>
+            <div className="relative flex items-center">
+              <div className="flex-1 border-t border-zinc-800" />
+              <span className="px-3 text-xs text-zinc-500 uppercase tracking-wider font-semibold">
+                or continue with email
+              </span>
+              <div className="flex-1 border-t border-zinc-800" />
+            </div>
+
+            {error && (
+              <div className="p-3.5 rounded-xl bg-red-950/50 border border-red-800/50 text-red-400 text-sm flex items-center gap-2.5">
+                <AlertCircle className="size-4 shrink-0" />
+                <span>{error}</span>
+              </div>
+            )}
           </div>
-        </div>
-      </div>
+        }
+      />
     </div>
   );
 }

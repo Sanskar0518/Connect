@@ -46,10 +46,9 @@ export function UploadDropzone({ onSuccess }: UploadDropzoneProps) {
           `Extracted ${data.extracted.skillsCount} skills, ${data.extracted.coursesCount} courses, ${data.extracted.projectsCount} projects.`
         );
         onSuccess(data.extracted);
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      } catch (err: any) {
+      } catch (err: unknown) {
         setState("error");
-        setMessage(err.message || "Something went wrong.");
+        setMessage(err instanceof Error ? err.message : "Something went wrong.");
       }
     },
     [onSuccess]
