@@ -129,9 +129,17 @@ export function UploadDropzone({ onSuccess }: UploadDropzoneProps) {
                 <span>{fileName}</span>
               </div>
               <p className="text-[11px] text-muted-foreground">{message}</p>
-              <p className="text-[11px] text-primary underline underline-offset-2 cursor-pointer mt-1">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setState("idle");
+                  setMessage("");
+                }}
+                className="text-[11px] text-primary underline underline-offset-2 hover:opacity-80 transition-opacity cursor-pointer mt-1"
+              >
                 Upload another file
-              </p>
+              </button>
             </div>
           )}
 
@@ -139,9 +147,17 @@ export function UploadDropzone({ onSuccess }: UploadDropzoneProps) {
             <div className="space-y-1">
               <p className="text-xs font-semibold text-destructive">Upload failed</p>
               <p className="text-[11px] text-muted-foreground">{message}</p>
-              <p className="text-[11px] text-primary underline underline-offset-2 cursor-pointer mt-1">
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setState("idle");
+                  setMessage("");
+                }}
+                className="text-[11px] text-primary underline underline-offset-2 hover:opacity-80 transition-opacity cursor-pointer mt-1"
+              >
                 Try again
-              </p>
+              </button>
             </div>
           )}
         </div>

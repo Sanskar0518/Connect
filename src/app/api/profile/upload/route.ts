@@ -8,7 +8,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { extractTextFromDocument, ALLOWED_MIME_TYPES, MAX_FILE_SIZE_BYTES } from "@/lib/parsing";
+import {
+  extractTextFromDocument,
+  ALLOWED_MIME_TYPES,
+  ALLOWED_EXTENSIONS,
+  MAX_FILE_SIZE_BYTES,
+} from "@/lib/parsing";
 import { encrypt, sha256 } from "@/lib/security/crypto";
 import { generateStructured } from "@/lib/ai/client";
 import { TranscriptParseResultSchema } from "@/lib/ai/schemas/transcript";
@@ -44,8 +49,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Validate MIME type
-  if (!ALLOWED_MIME_TYPES.includes(file.type as typeof ALLOWED_MIME_TYPES[number])) {
+  // Validate MIME type or extension
+  const fileExt = "." + (file.name.split(".").pop()?.toLowerCase() || "");
+  const isAllowedExt = ALLOWED_EXTENSIONS.includes(fileExt);
+  const isAllowedMime =
+    ALLOWED_MIME_TYPES.includes(file.type as (typeof ALLOWED_MIME_TYPES)[number]) ||
+    file.type.includes("pdf") ||
+    file.type.includes("word") ||
+    file.type.startsWith("text/");
+
+  if (!isAllowedExt && !isAllowedMime) {
     return NextResponse.json(
       { error: "Unsupported file type. Please upload PDF, DOCX, or TXT." },
       { status: 415 }
@@ -68,7 +81,7 @@ export async function POST(req: NextRequest) {
   // Extract text
   let documentText: string;
   try {
-    documentText = await extractTextFromDocument(buffer, file.type);
+    documentText = await extractTextFromDocument(buffer, file.type, file.name);
   } catch (err) {
     console.error("Document extraction failed:", err);
     return NextResponse.json({ error: "Could not read document text." }, { status: 422 });
