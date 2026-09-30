@@ -9,6 +9,11 @@ const nextConfig = {
       },
     ],
   },
+  experimental: {
+    outputFileTracingIncludes: {
+      '/**': ['./prisma/seed.db'],
+    },
+  },
 };
 
 export default nextConfig;
