@@ -47,54 +47,51 @@ export default function LoginPage() {
     setError(null);
     setGoogleLoading(true);
     try {
-      // 1. Try Firebase Google Popup (Instant popup modal)
-      try {
-        const result = await signInWithGooglePopup();
-        if (result?.user?.email) {
-          const idToken = await result.user.getIdToken();
-          const authRes = await signIn("firebase", {
-            idToken,
-            email: result.user.email,
-            name: result.user.displayName || result.user.email.split("@")[0],
-            image: result.user.photoURL || "",
-            redirect: false,
-          });
+      const result = await signInWithGooglePopup();
+      if (result?.user?.email) {
+        const idToken = await result.user.getIdToken();
+        const authRes = await signIn("firebase", {
+          idToken,
+          email: result.user.email,
+          name: result.user.displayName || result.user.email.split("@")[0],
+          image: result.user.photoURL || "",
+          redirect: false,
+        });
 
-          if (!authRes?.error) {
-            router.push("/dashboard");
-            router.refresh();
-            return;
-          }
-        }
-      } catch (fbErr: unknown) {
-        const code = (fbErr as { code?: string })?.code;
-        if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        if (authRes?.error) {
+          setError(authRes.error);
           setGoogleLoading(false);
           return;
         }
-        console.info("Firebase Google popup fallback to Supabase/OAuth:", fbErr);
+
+        router.push("/dashboard");
+        router.refresh();
+      }
+    } catch (fbErr: unknown) {
+      setGoogleLoading(false);
+      const code = (fbErr as { code?: string })?.code;
+      if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+        return;
+      }
+      if (code === "auth/unauthorized-domain") {
+        setError(
+          `Domain "${window.location.hostname}" is not authorized in Firebase. Please add it to your Firebase Console under Authentication -> Settings -> Authorized domains.`
+        );
+        return;
+      }
+      if (code === "auth/operation-not-allowed") {
+        setError(
+          "Google Sign-In is disabled in Firebase. Please enable the Google provider in Firebase Console -> Authentication -> Sign-in method."
+        );
+        return;
+      }
+      if (code === "auth/popup-blocked") {
+        setError("Sign-in popup was blocked by your browser. Please allow popups for this site and try again.");
+        return;
       }
 
-      // 2. Fallback to Supabase Google OAuth
-      const supabase = getSupabaseClient();
-      if (supabase) {
-        const { error: sbError } = await supabase.auth.signInWithOAuth({
-          provider: "google",
-          options: {
-            redirectTo: `${window.location.origin}/auth/callback`,
-          },
-        });
-        if (sbError) {
-          console.warn("Supabase Google OAuth fallback to NextAuth:", sbError.message);
-          await signIn("google", { callbackUrl: "/dashboard" });
-        }
-      } else {
-        await signIn("google", { callbackUrl: "/dashboard" });
-      }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : "Failed to initiate Google sign-in";
+      const msg = fbErr instanceof Error ? fbErr.message : "Failed to sign in with Google";
       setError(msg);
-      setGoogleLoading(false);
     }
   };
 
