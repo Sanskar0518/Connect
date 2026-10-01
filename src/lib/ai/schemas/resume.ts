@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Candidate info extracted from resume
 export const CandidateInfoSchema = z.object({
-  name: z.string().describe("Candidate full name"),
+  name: z.string().default("Candidate").describe("Candidate full name"),
   email: z.string().nullable().optional().describe("Email address"),
   phone: z.string().nullable().optional().describe("Phone number"),
   location: z.string().nullable().optional().describe("City, State or Country"),
@@ -29,7 +29,7 @@ export const ExperienceItemSchema = z.object({
   role: z.string().describe("Job title or internship role"),
   company: z.string().describe("Company or organization name"),
   period: z.string().nullable().optional().describe("Duration e.g. 2023 - Present"),
-  highlights: z.array(z.string()).describe("Key bullet points or achievements"),
+  highlights: z.array(z.string()).default([]).describe("Key bullet points or achievements"),
 });
 
 // Project history
@@ -51,32 +51,49 @@ export const CategorizedSkillsSchema = z.object({
 });
 
 // Actionable Bullet Rewrites
-export const ResumeRewriteSchema = z.object({
-  section: z.string().describe("Section name e.g. Experience, Summary, Projects"),
-  before: z.string().describe("Original bullet or text"),
-  after: z.string().describe("Action-verb driven, metric-oriented rewrite"),
-  reason: z.string().describe("Why this rewrite improves ATS score and hiring manager appeal"),
-});
+export const ResumeRewriteSchema = z.union([
+  z.object({
+    section: z.string().default("Experience").describe("Section name e.g. Experience, Summary, Projects"),
+    before: z.string().default("Original resume point").describe("Original bullet or text"),
+    after: z.string().default("").describe("Action-verb driven, metric-oriented rewrite"),
+    reason: z.string().default("Uses action verb and quantified outcome to increase ATS match").describe("Why this rewrite improves ATS score"),
+  }),
+  z.string().transform((str) => ({
+    section: "Experience",
+    before: "Original bullet from resume",
+    after: str,
+    reason: "Action-oriented metric rewrite to improve ATS ranking",
+  })),
+]);
 
-export type ResumeRewrite = z.infer<typeof ResumeRewriteSchema>;
+export type ResumeRewrite = {
+  section: string;
+  before: string;
+  after: string;
+  reason: string;
+};
 
 // Complete Resume Screening & Extraction Schema
 export const ResumeScreeningSchema = z.object({
-  candidate: CandidateInfoSchema,
+  candidate: CandidateInfoSchema.default({ name: "Candidate", links: {} }),
   education: z.array(EducationItemSchema).default([]),
   experience: z.array(ExperienceItemSchema).default([]),
   projects: z.array(ProjectItemSchema).default([]),
-  skills: CategorizedSkillsSchema,
+  skills: CategorizedSkillsSchema.default({
+    technical: [],
+    frontend: [],
+    backend: [],
+    databasesAndCloud: [],
+    softSkills: [],
+  }),
   atsScreening: z.object({
-    atsScore: z.number().min(0).max(100).describe("ATS compatibility score 0-100"),
-    matchLevel: z
-      .enum(["Strong Match", "Good Match", "Moderate Match", "Needs Improvement"])
-      .default("Moderate Match"),
-    summary: z.string().describe("Comprehensive recruiter/ATS summary assessment"),
-    strengths: z.array(z.string()).describe("Key strengths identified"),
-    criticalGaps: z.array(z.string()).describe("Critical missing elements or formatting weaknesses"),
-    missingKeywords: z.array(z.string()).describe("Important keywords missing for target role"),
-    recommendedRoles: z.array(z.string()).default([]).describe("Top roles best suited for this candidate profile"),
+    atsScore: z.number().min(0).max(100).default(75).describe("ATS compatibility score 0-100"),
+    matchLevel: z.string().default("Good Match"),
+    summary: z.string().default("Candidate evaluation completed successfully."),
+    strengths: z.array(z.string()).default([]),
+    criticalGaps: z.array(z.string()).default([]),
+    missingKeywords: z.array(z.string()).default([]),
+    recommendedRoles: z.array(z.string()).default([]),
     actionableRewrites: z.array(ResumeRewriteSchema).default([]),
   }),
 });

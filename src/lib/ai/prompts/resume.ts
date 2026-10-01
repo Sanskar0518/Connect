@@ -6,31 +6,88 @@ export function buildResumeScreeningPrompt(params: {
 }): string {
   const { resumeText, targetRole = "Software Engineer", targetCompany, userSkills = [] } = params;
 
-  return `You are an elite Applicant Tracking System (ATS) screening engine and senior tech recruiter.
-Your mission is to perform dual tasks on the provided resume:
-1. EXTRACT: Accurately extract all structured candidate information (name, contact info, links, summary, education, experience, projects, categorized skills).
-2. SCREEN & EVALUATE: Provide an objective ATS compatibility score (0-100), identify match level, uncover critical gaps and missing role keywords, highlight strengths, and provide actionable bullet rewrites using Google/XYZ formula ("Accomplished [X] as measured by [Y], by doing [Z]").
+  return `You are an elite Applicant Tracking System (ATS) screening engine and senior talent extraction specialist.
+Your mission is to analyze the candidate's resume against the target role and output strictly valid JSON matching the exact schema below.
 
-TARGET EVALUATION:
-- Target Role: "${targetRole}"
-${targetCompany ? `- Target Company: "${targetCompany}"` : ""}
-${userSkills.length > 0 ? `- Known Candidate Skills: ${userSkills.join(", ")}` : ""}
+TARGET ROLE: "${targetRole}"
+${targetCompany ? `TARGET COMPANY: "${targetCompany}"` : ""}
+${userSkills.length > 0 ? `CANDIDATE KNOWN SKILLS: ${userSkills.join(", ")}` : ""}
 
-RESUME TEXT:
+RESUME CONTENT:
 ========================================
 ${resumeText.slice(0, 8000)}
 ========================================
 
-INSTRUCTIONS:
-- Ensure all extracted information is factual and strictly based on the resume text.
-- If phone, links, location, or GPA are not mentioned, return null for those specific fields.
-- Calculate an honest, realistic ATS score:
-  * 80-100: Exceptional candidate with strong metrics, clear layout, relevant tech stack, and zero red flags.
-  * 60-79: Solid candidate but missing quantified business impact, specific target keywords, or detailed project metrics.
-  * <60: Needs major improvement, missing core sections, poor keyword alignment, or vague bullet points.
-- Provide 2 to 4 high-impact actionable rewrites for weak bullets found in the resume.
-- Categorize skills cleanly into technical (languages), frontend, backend, databasesAndCloud, and softSkills.
-- Output MUST be valid JSON adhering strictly to the schema without any markdown formatting or outside text.`;
+EXPECTED JSON SCHEMA FORMAT:
+{
+  "candidate": {
+    "name": "Candidate Full Name",
+    "email": "email or null",
+    "phone": "phone or null",
+    "location": "location or null",
+    "summary": "Concise professional summary",
+    "links": {
+      "github": "url or null",
+      "linkedin": "url or null",
+      "portfolio": "url or null"
+    }
+  },
+  "education": [
+    {
+      "degree": "Degree and major",
+      "institution": "University / College name",
+      "year": "Graduation year or dates",
+      "gpa": "GPA or null"
+    }
+  ],
+  "experience": [
+    {
+      "role": "Position Title",
+      "company": "Company Name",
+      "period": "Start - End Date",
+      "highlights": ["Key achievement 1", "Key achievement 2"]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Project Name",
+      "technologies": ["Tech 1", "Tech 2"],
+      "description": "Short project description",
+      "highlights": ["Key feature or impact"],
+      "link": "url or null"
+    }
+  ],
+  "skills": {
+    "technical": ["Languages e.g. TypeScript, Python, Java, SQL"],
+    "frontend": ["React", "Next.js", "Tailwind CSS"],
+    "backend": ["Node.js", "Express", "REST APIs"],
+    "databasesAndCloud": ["PostgreSQL", "Supabase", "Docker", "AWS"],
+    "softSkills": ["Problem Solving", "Collaboration", "Agile"]
+  },
+  "atsScreening": {
+    "atsScore": 78,
+    "matchLevel": "Good Match",
+    "summary": "2-3 sentences evaluating candidate match, strengths and growth areas for target role.",
+    "strengths": ["Clear strength 1", "Clear strength 2", "Clear strength 3"],
+    "criticalGaps": ["Area to improve 1", "Missing qualification or metric 2"],
+    "missingKeywords": ["Target keyword 1", "Target keyword 2", "Target keyword 3"],
+    "recommendedRoles": ["${targetRole}", "Related Role 2"],
+    "actionableRewrites": [
+      {
+        "section": "Experience",
+        "before": "Original bullet from resume text",
+        "after": "High-impact rewrite following Google formula: Accomplished [X] measured by [Y] doing [Z]",
+        "reason": "Uses action verb and quantified outcome to increase ATS match"
+      }
+    ]
+  }
+}
+
+CRITICAL RULES:
+- Output MUST be valid JSON only. Do not wrap in markdown quotes or preface with any commentary.
+- matchLevel MUST be one of: "Strong Match", "Good Match", "Moderate Match", or "Needs Improvement".
+- Every item in actionableRewrites MUST be an object with "section", "before", "after", and "reason".
+- atsScore MUST be an integer between 0 and 100 based on keyword density, metrics, experience, and role alignment.`;
 }
 
 // Backward compatibility helper
@@ -42,3 +99,4 @@ export function buildResumeAnalysisPrompt(params: {
 }): string {
   return buildResumeScreeningPrompt(params);
 }
+
