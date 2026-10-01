@@ -9,6 +9,19 @@ const nextConfig = {
       },
     ],
   },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin-allow-popups',
+          },
+        ],
+      },
+    ];
+  },
   experimental: {
     serverComponentsExternalPackages: ['pdf-parse', '@napi-rs/canvas', 'pdfjs-dist'],
     outputFileTracingIncludes: {

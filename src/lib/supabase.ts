@@ -9,34 +9,53 @@ export function isSupabaseConfigured(): boolean {
   return Boolean(supabaseUrl && (supabaseAnonKey || supabaseServiceRoleKey));
 }
 
-// Single client instance for browser usage
-let clientInstance: SupabaseClient | null = null;
+// Single client instance cache
+declare global {
+  // eslint-disable-next-line no-var
+  var __supabaseBrowserClient: SupabaseClient | undefined;
+}
+
+let serverClientInstance: SupabaseClient | null = null;
 
 export function getSupabaseClient(): SupabaseClient | null {
   if (!isSupabaseConfigured()) return null;
-  if (!clientInstance) {
-    clientInstance = createClient(supabaseUrl, supabaseAnonKey, {
-      auth: {
-        persistSession: typeof window !== "undefined",
-        autoRefreshToken: typeof window !== "undefined",
-        detectSessionInUrl: typeof window !== "undefined",
-      },
-    });
+  if (typeof window !== "undefined") {
+    if (!globalThis.__supabaseBrowserClient) {
+      globalThis.__supabaseBrowserClient = createClient(supabaseUrl, supabaseAnonKey, {
+        auth: {
+          persistSession: true,
+          autoRefreshToken: true,
+          detectSessionInUrl: true,
+        },
+      });
+    }
+    return globalThis.__supabaseBrowserClient;
   }
-  return clientInstance;
-}
-
-export const supabase = getSupabaseClient();
-
-// Server-side admin client using the service role key for privileged access (e.g. storage, admin ops)
-export const supabaseAdmin = isSupabaseConfigured()
-  ? createClient(supabaseUrl, supabaseServiceRoleKey, {
+  if (!serverClientInstance) {
+    serverClientInstance = createClient(supabaseUrl, supabaseAnonKey, {
       auth: {
         persistSession: false,
         autoRefreshToken: false,
+        detectSessionInUrl: false,
       },
-    })
-  : null;
+    });
+  }
+  return serverClientInstance;
+}
+
+export const supabase = typeof window !== "undefined" ? getSupabaseClient() : null;
+
+// Server-side admin client using the service role key for privileged access (e.g. storage, admin ops)
+// Strictly guarded so it is NEVER initialized in browser context (which triggers multiple GoTrueClient warnings)
+export const supabaseAdmin =
+  typeof window === "undefined" && isSupabaseConfigured() && supabaseServiceRoleKey
+    ? createClient(supabaseUrl, supabaseServiceRoleKey, {
+        auth: {
+          persistSession: false,
+          autoRefreshToken: false,
+        },
+      })
+    : null;
 
 /**
  * Default storage bucket name for Connect assets (transcripts, resumes, avatars, project media)

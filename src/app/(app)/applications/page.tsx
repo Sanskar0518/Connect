@@ -61,18 +61,18 @@ export default function ApplicationsPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-5">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight text-white">
+            <h1 className="text-2xl font-bold tracking-tight text-foreground">
               Career Applications
             </h1>
-            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-violet-500/20 text-violet-300 border border-violet-500/30 rounded-full text-xs font-semibold">
+            <span className="flex items-center gap-1.5 px-2.5 py-1 bg-violet-500/15 text-violet-600 dark:text-violet-300 border border-violet-500/30 rounded-full text-xs font-semibold">
               <Sparkles className="w-3 h-3" />
               AI-Powered
             </span>
           </div>
-          <p className="text-sm text-white/50 mt-1">
+          <p className="text-sm text-muted-foreground mt-1">
             AI resume scoring, intelligent job matching, and deadline tracking — all in one place.
           </p>
         </div>
@@ -87,27 +87,27 @@ export default function ApplicationsPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative flex items-center gap-3 p-4 rounded-2xl border text-left transition-all duration-200 ${
+              className={`relative flex items-center gap-3 p-4 rounded-2xl border text-left transition-all duration-200 shadow-sm ${
                 isActive
-                  ? "border-white/20 bg-white/10"
-                  : "border-white/5 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/10"
+                  ? "border-violet-500/40 bg-card ring-2 ring-violet-500/20"
+                  : "border-border bg-card/60 hover:bg-card hover:border-violet-500/30"
               }`}
             >
               <div
-                className={`w-10 h-10 rounded-xl bg-gradient-to-br ${tab.color} flex items-center justify-center flex-shrink-0`}
+                className={`w-10 h-10 rounded-xl bg-gradient-to-br ${tab.color} flex items-center justify-center flex-shrink-0 shadow-sm`}
               >
                 <Icon className="w-5 h-5 text-white" />
               </div>
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className={`font-semibold text-sm ${isActive ? "text-white" : "text-white/70"}`}>
+                  <span className={`font-semibold text-sm ${isActive ? "text-foreground font-bold" : "text-foreground/80"}`}>
                     {tab.label}
                   </span>
-                  <span className="px-1.5 py-0.5 bg-white/10 text-white/40 rounded text-[10px] font-mono">
+                  <span className="px-1.5 py-0.5 bg-muted text-muted-foreground border border-border rounded text-[10px] font-mono">
                     {tab.badge}
                   </span>
                 </div>
-                <p className="text-white/40 text-xs mt-0.5 truncate">{tab.description}</p>
+                <p className="text-muted-foreground text-xs mt-0.5 truncate">{tab.description}</p>
               </div>
               {isActive && (
                 <div
