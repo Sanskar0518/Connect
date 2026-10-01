@@ -49,6 +49,7 @@ export function LeaderboardView() {
 
   useEffect(() => {
     fetchLeaderboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [period, filter]);
 
   return (

@@ -12,8 +12,8 @@ export async function extractTextFromPDF(buffer: Buffer): Promise<string> {
   // Strategy 1: pdf-parse v2 class API (PDFParse)
   try {
     const pdfModule = await import("pdf-parse");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const PDFParseClass = (pdfModule as any).PDFParse || (pdfModule as any).default?.PDFParse;
+    const mod = pdfModule as Record<string, any>;
+    const PDFParseClass = mod.PDFParse || (mod.default as Record<string, any>)?.PDFParse;
     if (PDFParseClass) {
       const uint8 = new Uint8Array(buffer);
       const parser = new PDFParseClass({ data: uint8 });
@@ -68,13 +68,12 @@ export async function extractTextFromPDF(buffer: Buffer): Promise<string> {
   // Strategy 3: pdf-parse v1 function API (legacy default export)
   try {
     const pdfModule = await import("pdf-parse");
+    const mod = pdfModule as Record<string, any>;
     const fn =
       typeof pdfModule === "function"
         ? pdfModule
-        : // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        typeof (pdfModule as any).default === "function"
-        ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          (pdfModule as any).default
+        : typeof mod.default === "function"
+        ? mod.default
         : null;
 
     if (fn) {

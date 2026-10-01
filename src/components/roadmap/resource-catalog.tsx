@@ -68,6 +68,7 @@ export function ResourceCatalog({ trackSlug, userGaps = [] }: ResourceCatalogPro
 
   useEffect(() => {
     fetchResources();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trackSlug, gapOnly, selectedType, selectedCost, selectedLevel]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
